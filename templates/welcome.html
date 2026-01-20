@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>PlanNGo – Travel Smart</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+
+<style>
+*{box-sizing:border-box;}
+
+body{
+  margin:0;
+  font-family:'Inter',sans-serif;
+  background:#f6f7f9;
+  color:#222;
+}
+
+/* HEADER */
+.header{
+  background:linear-gradient(135deg,#ff5a5f,#ff9068);
+  padding:16px;
+  border-bottom-left-radius:20px;
+  border-bottom-right-radius:20px;
+  color:#fff;
+}
+
+.header-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.header h1{
+  margin:0;
+  font-size:22px;
+}
+
+.header p{
+  margin:4px 0 0;
+  font-size:13px;
+  opacity:.9;
+}
+
+/* AUTH BUTTONS */
+.auth-buttons{
+  display:flex;
+  gap:10px;
+}
+
+.auth-buttons a{
+  text-decoration:none;
+  font-size:12px;
+  padding:6px 14px;
+  border-radius:20px;
+  font-weight:600;
+  transition:.3s;
+}
+
+.login-btn{
+  color:#fff;
+  border:1px solid rgba(255,255,255,.8);
+}
+
+.signup-btn{
+  background:#fff;
+  color:#ff5a5f;
+}
+
+.auth-buttons a:hover{
+  transform:scale(1.05);
+}
+
+/* CATEGORY CARD */
+.categories{
+  background:#fff;
+  margin:-25px 16px 16px;
+  padding:16px;
+  border-radius:18px;
+  box-shadow:0 10px 30px rgba(0,0,0,.1);
+  display:flex;
+  justify-content:space-between;
+}
+
+.cat{
+  text-align:center;
+  font-size:12px;
+  color:#444;
+}
+
+.cat i{
+  font-size:20px;
+  background:#ffe8e3;
+  color:#ff5a5f;
+  padding:14px;
+  border-radius:50%;
+  margin-bottom:6px;
+}
+
+/* SERVICES */
+.section{
+  padding:16px;
+}
+
+.section h3{
+  margin-bottom:12px;
+  font-size:16px;
+}
+
+.services{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+}
+
+.service-card{
+  background:#fff;
+  border-radius:16px;
+  padding:14px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  box-shadow:0 6px 18px rgba(0,0,0,.08);
+}
+
+.service-card span{
+  font-size:13px;
+  font-weight:600;
+}
+
+.service-card i{
+  font-size:18px;
+  color:#ff5a5f;
+}
+
+/* TRENDING */
+.trending{
+  display:flex;
+  gap:14px;
+  overflow-x:auto;
+}
+
+.place{
+  min-width:180px;
+  height:220px;
+  border-radius:18px;
+  background-size:cover;
+  background-position:center;
+  position:relative;
+  color:#fff;
+}
+
+.place::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(to top,rgba(0,0,0,.7),transparent);
+  border-radius:18px;
+}
+
+.place div{
+  position:absolute;
+  bottom:14px;
+  left:14px;
+  z-index:2;
+}
+
+.place h4{
+  margin:0;
+}
+
+.place p{
+  margin:4px 0 0;
+  font-size:13px;
+}
+
+/* OFFER */
+.offer{
+  margin:16px;
+  background:linear-gradient(135deg,#7f00ff,#e100ff);
+  color:#fff;
+  padding:18px;
+  border-radius:18px;
+  font-size:14px;
+  font-weight:600;
+}
+
+/* BOTTOM NAV */
+.bottom-nav{
+  position:fixed;
+  bottom:0;
+  left:0;
+  right:0;
+  background:#fff;
+  display:flex;
+  justify-content:space-around;
+  padding:10px 0;
+  box-shadow:0 -6px 20px rgba(0,0,0,.12);
+}
+
+.bottom-nav a{
+  text-decoration:none;
+  color:#777;
+  font-size:12px;
+  text-align:center;
+}
+
+.bottom-nav i{
+  display:block;
+  font-size:18px;
+  margin-bottom:4px;
+}
+
+.bottom-nav a.active{
+  color:#ff5a5f;
+}
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-top">
+    <div>
+      <h1>PlanNGo ✈️</h1>
+      <p>Your smart travel itinerary partner</p>
+    </div>
+
+    <div class="auth-buttons">
+      <a href="/login" class="login-btn">Login</a>
+      <a href="/signup" class="signup-btn">Sign Up</a>
+    </div>
+  </div>
+</div>
+
+<!-- CATEGORIES -->
+<div class="categories">
+  <div class="cat"><i class="fa fa-plane"></i>Flights</div>
+  <div class="cat"><i class="fa fa-hotel"></i>Hotels</div>
+  <div class="cat"><i class="fa fa-train"></i>Trains</div>
+  <div class="cat"><i class="fa fa-bus"></i>Buses</div>
+</div>
+
+<!-- SERVICES -->
+<div class="section">
+  <h3>More than just travel</h3>
+  <div class="services">
+    <div class="service-card"><span>Web Check-In</span><i class="fa fa-check"></i></div>
+    <div class="service-card"><span>Refund Status</span><i class="fa fa-wallet"></i></div>
+    <div class="service-card"><span>Choose Seat</span><i class="fa fa-chair"></i></div>
+    <div class="service-card"><span>Meals</span><i class="fa fa-utensils"></i></div>
+  </div>
+</div>
+
+<!-- TRENDING -->
+<div class="section">
+  <h3>Trending Itineraries</h3>
+  <a href="/Konkan" class="Beaches-btn"><div class="trending">
+    <div class="place" style="background-image:url('{{ url_for('static', filename='images/Ganapatipule.jpg') }}');">
+      <div><h4>Beaches</h4></div>
+    </div></a>
+    <a href="/hill_forts" class="hill_forts-btn"><div class="place" style="background-image: url('{{ url_for('static', filename='images/lohagad.jpeg') }}');">
+      <div><h4>Hills-Forts</h4></div>
+    </div></a>
+    <a href="ajanta_ellora" class="Historical Places"><div class="place" style="background-image:url('{{ url_for('static', filename='images/AE.jpeg') }}');">
+      <div><h4>Historical Places</h4></div>
+    </div></a>
+  </div>
+</div>
+
+<!-- OFFER -->
+<div class="offer">
+  🎉 Get up to 40% OFF on curated travel itineraries!
+</div>
+
+<!-- BOTTOM NAV -->
+<div class="bottom-nav">
+  <a href="/" class="active"><i class="fa fa-home"></i>Home</a>
+  <a href="/itinerary"><i class="fa fa-map"></i>Trips</a>
+  <a href="/explore"><i class="fa fa-compass"></i>Explore</a>
+  <a href="/profile">
+  <i class="fa fa-user"></i>
+  {% if user %}
+    {{ user['name'] }}
+  {% else %}
+    Profile
+  {% endif %}
+</a>
+
+</div>
+
+</body>
+</html>

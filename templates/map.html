@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Map Page</title>
+
+    <!-- Leaflet CSS (REQUIRED) -->
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    />
+
+    <!-- MAP HEIGHT (REQUIRED) -->
+    <style>
+        #map {
+            height: 100vh;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+<h2>Map Page Loaded</h2>
+<link rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css">
+
+<div id="map" style="height: 600px; width: 100%;"></div>
+
+<!-- Load Leaflet JS AFTER map div -->
+<script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js"></script>
+
+
+<script>
+  var map = L.map('map').setView([18.9220, 72.8347], 15);
+
+  // Load map tiles
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '© OpenStreetMap contributors'
+  }).addTo(map);
+
+  // Marker for live position
+  var userMarker = L.marker([18.9220, 72.8347]).addTo(map);
+
+  // Polyline to track movement
+ // var routePath = L.polyline([], { weight: 4 }).addTo(map);
+
+  // GPS tracking
+  if ("geolocation" in navigator) {
+    navigator.geolocation.watchPosition(
+      function (position) {
+        var lat = position.coords.latitude;
+        var lng = position.coords.longitude;
+
+        var newLatLng = [lat, lng];
+
+        // Move marker
+        userMarker.setLatLng(newLatLng)
+          .bindPopup("You are here")
+          .openPopup();
+
+        // Center map
+        map.setView(newLatLng, 16);
+
+        // Add point to route
+        routePath.addLatLng(newLatLng);
+      },
+      function (error) {
+        alert("GPS error: " + error.message);
+      },
+      {
+        enableHighAccuracy: true,
+        maximumAge: 1000,
+        timeout: 5000
+      }
+    );
+  } else {
+    alert("Geolocation not supported");
+  }
+</script>
+
+
+</body>
+</html>

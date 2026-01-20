@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alibaug Beach</title>
+
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+  font-family:"Segoe UI", Arial, sans-serif;
+}
+
+body{
+  background:#9bd6a5;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  min-height:100vh;
+}
+
+/* APP */
+.app{
+  width:100%;
+  max-width:390px;
+  height:800px;
+  background:#f4f6f8;
+  border-radius:32px;
+  overflow:hidden;
+  box-shadow:0 20px 40px rgba(0,0,0,0.35);
+  position:relative;
+  padding-bottom:90px;
+}
+
+/* BACK BUTTON */
+.back-btn{
+  position:absolute;
+  top:16px;
+  left:16px;
+  text-decoration:none;
+  background:rgba(0,0,0,0.6);
+  color:#fff;
+  padding:8px 12px;
+  border-radius:12px;
+  font-size:14px;
+  z-index:10;
+}
+
+/* HERO */
+.hero{
+  height:200px;
+  background:url("static/images/Alibaug.jpg") center/cover no-repeat;
+  position:relative;
+}
+
+.hero::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:rgba(0,0,0,0.35);
+}
+
+.hero-content{
+  position:absolute;
+  bottom:18px;
+  left:16px;
+  color:#fff;
+  z-index:1;
+}
+
+.hero-content h1{
+  font-size:22px;
+  font-weight:600;
+}
+
+.hero-content p{
+  font-size:14px;
+  opacity:0.9;
+}
+
+/* DETAILS CARD */
+.card{
+  background:#fff;
+  margin:30px 16px 20px;
+  border-radius:20px;
+  padding:16px;
+  box-shadow:0 8px 20px rgba(0,0,0,0.18);
+}
+
+/* TABS */
+.tabs{
+  display:flex;
+  justify-content:space-between;
+  border-bottom:1px solid #ddd;
+  margin-bottom:12px;
+}
+
+.tabs span{
+  padding:10px 6px;
+  font-size:14px;
+  color:#777;
+}
+
+.tabs .active{
+  color:#1c4e80;
+  border-bottom:2px solid #1c4e80;
+  font-weight:600;
+}
+
+/* INFO */
+.info p{
+  font-size:14px;
+  color:#333;
+  margin:6px 0;
+}
+
+/* ACTIONS */
+.actions{
+  display:flex;
+  gap:10px;
+  margin:16px 0;
+}
+
+.actions button{
+  flex:1;
+  border:none;
+  padding:12px;
+  border-radius:14px;
+  font-size:14px;
+  cursor:pointer;
+}
+
+.plan{
+  background:#1c4e80;
+  color:#fff;
+}
+
+.save{
+  background:#f1f1f1;
+}
+
+.route{
+  background:#e6f2ec;
+}
+
+/* ABOUT */
+.about h3{
+  font-size:16px;
+  margin-bottom:6px;
+}
+
+.about p{
+  font-size:14px;
+  color:#555;
+  line-height:1.5;
+}
+
+/* MAP */
+.map img{
+  width:100%;
+  margin-top:14px;
+  border-radius:14px;
+}
+
+/* NAV */
+.nav{
+  position:absolute;
+  bottom:0;
+  width:100%;
+  background:#fff;
+  display:flex;
+  justify-content:space-around;
+  padding:14px 0;
+  border-top-left-radius:24px;
+  border-top-right-radius:24px;
+  box-shadow:0 -5px 15px rgba(0,0,0,0.25);
+}
+
+.nav a{
+  text-decoration:none;
+  font-size:12px;
+  color:#333;
+}
+
+.nav .active{
+  color:#1c4e80;
+  font-weight:bold;
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+  <!-- BACK -->
+  <a href="konkan.html" class="back-btn">←</a>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-content">
+      <h1>Alibaug</h1>
+      <p>📍 Raigad, Maharashtra</p>
+    </div>
+  </div>
+
+  <!-- DETAILS -->
+  <div class="card">
+
+    <div class="tabs">
+      <span class="active">Summary</span>
+      <span>Photos</span>
+      <span>Reviews</span>
+      <span>Route</span>
+    </div>
+
+    <div class="info">
+      <p>📍 <b>Raigad, Maharashtra</b></p>
+      <p>🏖 Type: <b>Beach & Weekend Getaway</b></p>
+      <p>⏱ Ideal Duration: <b>1–2 Days</b></p>
+      <p>🌦 Best Time: <b>October – March</b></p>
+      <p>🏰 Nearby: Kolaba Fort</p>
+      <p>⚠ Note: Best sunsets in evening</p>
+    </div>
+
+    <div class="actions">
+      <button class="plan">📍 Plan Visit</button>
+      <button class="save">♡ Save</button>
+      <button class="route">🗺 Route</button>
+    </div>
+
+    <div class="about">
+      <h3>About</h3>
+      <p>
+        Alibaug is a popular beach destination near Mumbai, known for
+        its calm beaches, historic Kolaba Fort, and scenic sunsets.
+        It is a perfect weekend getaway for families and friends.
+      </p>
+    </div>
+
+    <div class="map">
+      <img src="images/map.png" alt="Alibaug Route Map">
+    </div>
+
+  </div>
+
+  <div class="nav">
+    <a href="dashboard.html">Home</a>
+    <a href="#">Saved</a>
+    <a href="#" class="active">Map</a>
+    <a href="#">Profile</a>
+    <a href="#">Settings</a>
+  </div>
+
+</div>
+
+
+
+</body>
+</html>

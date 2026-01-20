@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>PlanNGo – Login</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+
+<style>
+*{box-sizing:border-box;}
+
+body{
+  margin:0;
+  font-family:'Inter',sans-serif;
+  background:#f6f7f9;
+}
+
+/* HEADER */
+.header{
+  background:linear-gradient(135deg,#ff5a5f,#ff9068);
+  padding:20px;
+  border-bottom-left-radius:24px;
+  border-bottom-right-radius:24px;
+  color:#fff;
+}
+
+.header h1{
+  margin:0;
+  font-size:22px;
+}
+
+.header p{
+  margin-top:6px;
+  font-size:13px;
+  opacity:.9;
+}
+
+/* LOGIN CARD */
+.login-container{
+  margin:-40px auto 0;
+  max-width:360px;
+  background:#fff;
+  padding:22px;
+  border-radius:20px;
+  box-shadow:0 12px 30px rgba(0,0,0,.15);
+}
+
+.login-container h2{
+  text-align:center;
+  margin-bottom:20px;
+  font-size:18px;
+}
+
+/* INPUTS */
+.form-group{
+  margin-bottom:14px;
+}
+
+.form-group label{
+  display:block;
+  font-size:12px;
+  margin-bottom:6px;
+  color:#444;
+}
+
+.form-group input{
+  width:100%;
+  padding:12px;
+  border-radius:12px;
+  border:1px solid #ddd;
+  font-size:13px;
+  outline:none;
+}
+
+.form-group input:focus{
+  border-color:#ff5a5f;
+}
+
+/* BUTTON */
+.login-btn{
+  width:100%;
+  padding:12px;
+  border:none;
+  border-radius:18px;
+  background:linear-gradient(135deg,#ff5a5f,#ff9068);
+  color:#fff;
+  font-size:14px;
+  font-weight:600;
+  cursor:pointer;
+  margin-top:10px;
+}
+
+.login-btn:hover{
+  opacity:.9;
+}
+
+/* EXTRA */
+.extra{
+  display:flex;
+  justify-content:space-between;
+  font-size:12px;
+  margin-top:12px;
+}
+
+.extra a{
+  text-decoration:none;
+  color:#ff5a5f;
+}
+
+/* SIGNUP */
+.signup{
+  text-align:center;
+  margin-top:18px;
+  font-size:13px;
+}
+
+.signup a{
+  color:#ff5a5f;
+  font-weight:600;
+  text-decoration:none;
+}
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <h1>PlanNGo ✈️</h1>
+  <p>Login to continue your journey</p>
+</div>
+
+<!-- LOGIN CARD -->
+<div class="login-container">
+  <h2>Welcome Back</h2>
+
+  <form method="POST" action="/login">
+    <div class="form-group">
+      <label>Email</label>
+      <input type="email" name="email" placeholder="Enter your email" required>
+    </div>
+
+    <div class="form-group">
+      <label>Password</label>
+      <input type="password" name="password" placeholder="Enter your password" required>
+    </div>
+
+    <button type="submit" class="login-btn">Login</button>
+  </form>
+
+  <div class="extra">
+    <a href="#">Forgot Password?</a>
+    <a href="/">Back to Home</a>
+  </div>
+
+  <div class="signup">
+    Don’t have an account? <a href="/signup">Sign Up</a>
+  </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,33 @@
+body {
+    font-family: Arial;
+    background: linear-gradient(to right, #b3e5fc, #ffccbc);
+    text-align: center;
+}
+
+.container {
+    margin-top: 100px;
+}
+
+.btn {
+    padding: 15px 25px;
+    margin: 10px;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    background-color: #2196f3;
+    color: white;
+    cursor: pointer;
+}
+
+.green {
+    background-color: #4caf50;
+}
+
+.orange {
+    background-color: #ff9800;
+}
+
+input {
+    padding: 10px;
+    width: 200px;
+}
