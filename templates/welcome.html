@@ -216,81 +216,114 @@ body{
 .bottom-nav a.active{
   color:#ff5a5f;
 }
+
+/* PAGE LAYOUT FIX */
+.page{
+  height:100vh;
+  display:flex;
+  flex-direction:column;
+}
+
+.content{
+  flex:1;
+  overflow-y:auto;
+  padding-bottom:80px; /* space for bottom nav */
+}
+
 </style>
 </head>
 
 <body>
 
-<!-- HEADER -->
-<div class="header">
-  <div class="header-top">
-    <div>
-      <h1>PlanNGo ✈️</h1>
-      <p>Your smart travel itinerary partner</p>
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-top">
+      <div>
+        <h1>PlanNGo ✈️</h1>
+        <p>Your smart travel itinerary partner</p>
+      </div>
+
+      <div class="auth-buttons">
+        <a href="/login" class="login-btn">Login</a>
+        <a href="/signup" class="signup-btn">Sign Up</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCROLLABLE CONTENT -->
+  <div class="content">
+
+    <!-- CATEGORIES -->
+    <div class="categories">
+      <div class="cat"><i class="fa fa-plane"></i>Flights</div>
+      <div class="cat"><i class="fa fa-hotel"></i>Hotels</div>
+      <div class="cat"><i class="fa fa-train"></i>Trains</div>
+      <div class="cat"><i class="fa fa-bus"></i>Buses</div>
     </div>
 
-    <div class="auth-buttons">
-      <a href="/login" class="login-btn">Login</a>
-      <a href="/signup" class="signup-btn">Sign Up</a>
+    <!-- SERVICES -->
+    <div class="section">
+      <h3>More than just travel</h3>
+      <div class="services">
+        <div class="service-card"><span>Web Check-In</span><i class="fa fa-check"></i></div>
+        <div class="service-card"><span>Refund Status</span><i class="fa fa-wallet"></i></div>
+        <div class="service-card"><span>Choose Seat</span><i class="fa fa-chair"></i></div>
+        <div class="service-card"><span>Meals</span><i class="fa fa-utensils"></i></div>
+      </div>
     </div>
+
+    <!-- TRENDING -->
+    <div class="section">
+      <h3>Trending Itineraries</h3>
+
+      <div class="trending">
+        <a href="/Konkan">
+          <div class="place" style="background-image:url('{{ url_for('static', filename='images/Ganapatipule.jpg') }}');">
+            <div><h4>Beaches</h4></div>
+          </div>
+        </a>
+
+        <a href="/hill_forts">
+          <div class="place" style="background-image:url('{{ url_for('static', filename='images/lohagad.jpeg') }}');">
+            <div><h4>Hills-Forts</h4></div>
+          </div>
+        </a>
+
+        <a href="ajanta_ellora">
+          <div class="place" style="background-image:url('{{ url_for('static', filename='images/AE.jpeg') }}');">
+            <div><h4>Historical Places</h4></div>
+          </div>
+        </a>
+      </div>
+
+    </div>
+
+    <!-- OFFER -->
+    <div class="offer">
+      🎉 Get up to 40% OFF on curated travel itineraries!
+    </div>
+
   </div>
-</div>
 
-<!-- CATEGORIES -->
-<div class="categories">
-  <div class="cat"><i class="fa fa-plane"></i>Flights</div>
-  <div class="cat"><i class="fa fa-hotel"></i>Hotels</div>
-  <div class="cat"><i class="fa fa-train"></i>Trains</div>
-  <div class="cat"><i class="fa fa-bus"></i>Buses</div>
-</div>
-
-<!-- SERVICES -->
-<div class="section">
-  <h3>More than just travel</h3>
-  <div class="services">
-    <div class="service-card"><span>Web Check-In</span><i class="fa fa-check"></i></div>
-    <div class="service-card"><span>Refund Status</span><i class="fa fa-wallet"></i></div>
-    <div class="service-card"><span>Choose Seat</span><i class="fa fa-chair"></i></div>
-    <div class="service-card"><span>Meals</span><i class="fa fa-utensils"></i></div>
+  <!-- BOTTOM NAV -->
+  <div class="bottom-nav">
+    <a href="/" class="active"><i class="fa fa-home"></i>Home</a>
+    <a href="/itinerary"><i class="fa fa-map"></i>Trips</a>
+    <a href="/explore"><i class="fa fa-compass"></i>Explore</a>
+    <a href="/profile">
+      <i class="fa fa-user"></i>
+      {% if user %}
+        {{ user['name'] }}
+      {% else %}
+        Profile
+      {% endif %}
+    </a>
   </div>
-</div>
-
-<!-- TRENDING -->
-<div class="section">
-  <h3>Trending Itineraries</h3>
-  <a href="/Konkan" class="Beaches-btn"><div class="trending">
-    <div class="place" style="background-image:url('{{ url_for('static', filename='images/Ganapatipule.jpg') }}');">
-      <div><h4>Beaches</h4></div>
-    </div></a>
-    <a href="/hill_forts" class="hill_forts-btn"><div class="place" style="background-image: url('{{ url_for('static', filename='images/lohagad.jpeg') }}');">
-      <div><h4>Hills-Forts</h4></div>
-    </div></a>
-    <a href="ajanta_ellora" class="Historical Places"><div class="place" style="background-image:url('{{ url_for('static', filename='images/AE.jpeg') }}');">
-      <div><h4>Historical Places</h4></div>
-    </div></a>
-  </div>
-</div>
-
-<!-- OFFER -->
-<div class="offer">
-  🎉 Get up to 40% OFF on curated travel itineraries!
-</div>
-
-<!-- BOTTOM NAV -->
-<div class="bottom-nav">
-  <a href="/" class="active"><i class="fa fa-home"></i>Home</a>
-  <a href="/itinerary"><i class="fa fa-map"></i>Trips</a>
-  <a href="/explore"><i class="fa fa-compass"></i>Explore</a>
-  <a href="/profile">
-  <i class="fa fa-user"></i>
-  {% if user %}
-    {{ user['name'] }}
-  {% else %}
-    Profile
-  {% endif %}
-</a>
 
 </div>
 
 </body>
+
 </html>

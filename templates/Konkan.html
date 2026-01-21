@@ -2,84 +2,68 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<title>PlanNGo – Konkan Beaches</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Konkan Coastline Beaches</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
 
 <style>
-*{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
-  font-family:"Segoe UI", Arial, sans-serif;
-}
+*{box-sizing:border-box;}
 
 body{
-  background:rgba(117, 242, 153, 0.667);
+  margin:0;
+  font-family:'Inter',sans-serif;
+  background:#f6f7f9;
+  color:#222;
+}
+
+/* HEADER */
+.header{
+  background:linear-gradient(135deg,#ff5a5f,#ff9068);
+  padding:18px;
+  border-bottom-left-radius:20px;
+  border-bottom-right-radius:20px;
+  color:#fff;
+}
+
+.header-top{
   display:flex;
-  justify-content:center;
+  align-items:center;
+  gap:12px;
 }
 
-/* Mobile container */
-.app{
-  width:100%;
-  max-width:420px;
-  min-height:100vh;
-  background:linear-gradient(180deg,rgba(117, 242, 153, 0.667),#0b2239);
-  padding:60px 14px 90px; /* space for back button */
-  color:#fff;
-  position:relative;
-}
-
-/* BACK BUTTON */
 .back-btn{
-  position:absolute;
-  top:16px;
-  left:16px;
   text-decoration:none;
-  background:rgba(0,0,0,0.6);
   color:#fff;
-  padding:8px 12px;
-  border-radius:12px;
-  font-size:14px;
-  z-index:10;
+  font-size:18px;
 }
 
-/* Header */
-.header h1{
-  font-size:22px;
-  margin-bottom:6px;
-}
-.header p{
-  font-size:14px;
-  opacity:0.9;
-  margin-bottom:16px;
+/* SECTION */
+.section{
+  padding:16px;
 }
 
-/* Grid */
+.section h3{
+  margin-bottom:14px;
+  font-size:16px;
+}
+
+/* GRID */
 .grid{
   display:grid;
   grid-template-columns:1fr 1fr;
   gap:14px;
 }
 
-/* Card link */
-.card-link{
-  text-decoration:none;
-  color:inherit;
-}
-
-/* Card */
+/* CARD */
 .card{
   background:#fff;
-  color:#000;
   border-radius:16px;
   overflow:hidden;
-  box-shadow:0 6px 18px rgba(0,0,0,0.25);
-  transition:transform 0.2s;
-}
-
-.card:hover{
-  transform:translateY(-4px);
+  box-shadow:0 6px 18px rgba(0,0,0,.08);
+  text-decoration:none;
+  color:#222;
 }
 
 .card img{
@@ -92,143 +76,154 @@ body{
   padding:10px;
 }
 
-.card-content h3{
+.card-content h4{
+  margin:0 0 4px;
   font-size:14px;
-  margin-bottom:4px;
 }
 
 .card-content p{
+  margin:0;
   font-size:12px;
-  color:#555;
+  color:#666;
 }
 
-/* Bottom nav */
-.nav{
+/* BOTTOM NAV */
+.bottom-nav{
   position:fixed;
   bottom:0;
-  left:50%;
-  transform:translateX(-50%);
-  width:100%;
-  max-width:420px;
-  background:#ffffff;
+  left:0;
+  right:0;
+  background:#fff;
   display:flex;
   justify-content:space-around;
-  padding:12px 0 16px;
-  border-top-left-radius:20px;
-  border-top-right-radius:20px;
-  box-shadow:0 -5px 15px rgba(0,0,0,0.3);
+  padding:10px 0;
+  box-shadow:0 -6px 20px rgba(0,0,0,.12);
 }
 
-.nav a{
+.bottom-nav a{
   text-decoration:none;
+  color:#777;
   font-size:12px;
-  color:#333;
+  text-align:center;
 }
 
-.nav .active{
-  font-weight:bold;
-  color:#1c4e80;
+.bottom-nav i{
+  display:block;
+  font-size:18px;
+  margin-bottom:4px;
 }
+
+.bottom-nav a.active{
+  color:#ff5a5f;
+}
+
+.page{
+  height:100vh;
+  display:flex;
+  flex-direction:column;
+}
+
+.content{
+  flex:1;
+  overflow-y:auto;
+  padding-bottom:90px; /* space for bottom nav */
+}
+
 </style>
 </head>
 
 <body>
 
-<div class="app">
+<div class="page">
 
-  <!-- BACK BUTTON -->
-  <a href="dashboard.html" class="back-btn">←</a>
-
-  <!-- Header -->
+  <!-- HEADER -->
   <div class="header">
-    <h1>Konkan</h1>
-    <p>Coastline Beaches</p>
+    <div class="header-top">
+      <a href="/" class="back-btn"><i class="fa fa-arrow-left"></i></a>
+      <div>
+        <h2>Konkan</h2>
+        <p style="font-size:13px;opacity:.9;">Coastline Beaches</p>
+      </div>
+    </div>
   </div>
 
-  <!-- Grid -->
-  <div class="grid">
+  <!-- SCROLLABLE MIDDLE CONTENT -->
+  <div class="content">
+    <div class="section">
+      <h3>Popular Beaches</h3>
 
-    <a href="{{url_for('ganpatipule')}}">
-      <div class="card">
-        <img src="static/images/Ganapatipule.jpg">
-        <div class="card-content">
-          <h3>Ganapatipule</h3>
-          <p>Unique self created Ganesha idol and water sports</p>
-        </div>
+      <div class="grid">
+
+        <a href="{{ url_for('ganpatipule') }}" class="card">
+          <img src="{{ url_for('static', filename='images/Ganapatipule.jpg') }}">
+          <div class="card-content">
+            <h4>Ganapatipule</h4>
+            <p>Famous temple & water sports</p>
+          </div>
+        </a>
+
+        <a href="{{ url_for('tarkarli') }}" class="card">
+          <img src="{{ url_for('static', filename='images/Tarkarli.jpg') }}">
+          <div class="card-content">
+            <h4>Tarkarli</h4>
+            <p>Clear waters & scuba diving</p>
+          </div>
+        </a>
+
+        <a href="{{ url_for('alibaug') }}" class="card">
+          <img src="{{ url_for('static', filename='images/Alibaug.jpg') }}">
+          <div class="card-content">
+            <h4>Alibaug</h4>
+            <p>Weekend getaway from Mumbai</p>
+          </div>
+        </a>
+
+        <a href="{{ url_for('kashid') }}" class="card">
+          <img src="{{ url_for('static', filename='images/Kashid beach 🌊.jpg') }}">
+          <div class="card-content">
+            <h4>Kashid</h4>
+            <p>White sand & blue waters</p>
+          </div>
+        </a>
+
+        <a href="{{ url_for('harihareshwar') }}" class="card">
+          <img src="{{ url_for('static', filename='images/Harihareshwar.jpg') }}">
+          <div class="card-content">
+            <h4>Harihareshwar</h4>
+            <p>Temple town & rocky shores</p>
+          </div>
+        </a>
+
+        <a href="{{ url_for('diveagar') }}" class="card">
+          <img src="{{ url_for('static', filename='images/Diveagar beach.jpg') }}">
+          <div class="card-content">
+            <h4>Diveagar</h4>
+            <p>Peaceful beach & Ganesh temple</p>
+          </div>
+        </a>
+
+        <a href="{{ url_for('murud') }}" class="card">
+          <img src="{{ url_for('static', filename='images/murud.jpg') }}">
+          <div class="card-content">
+            <h4>Murud</h4>
+            <p>Beach near Janjira Fort</p>
+          </div>
+        </a>
+
       </div>
-    </a>
-
-    <a href="{{url_for('tarkarli')}}">
-      <div class="card">
-        <img src="static/images/Tarkarli.jpg">
-        <div class="card-content">
-          <h3>Tarkarli</h3>
-          <p>A paradise for beach lovers</p>
-        </div>
-      </div>
-    </a>
-
-    <a href="{{url_for('alibaug')}}">
-      <div class="card">
-        <img src="static/images/Alibaug.jpg">
-        <div class="card-content">
-          <h3>Alibaug</h3>
-          <p>A popular getaway from Mumbai</p>
-        </div>
-      </div>
-    </a>
-
-    <a href="{{url_for('kashid')}}">
-      <div class="card">
-        <img src="static/images/Kashid beach 🌊.jpg">
-        <div class="card-content">
-          <h3>Kashid</h3>
-          <p>A tranquil beach known for its white sands</p>
-        </div>
-      </div>
-    </a>
-
-    <a href="{{url_for('harihareshwar')}}">
-      <div class="card">
-        <img src="static/images/Harihareshwar.jpg">
-        <div class="card-content">
-          <h3>Harihareshwar</h3>
-          <p>Famous for its ancient temple and rocky beach, offering serene views.</p>
-        </div>
-      </div>
-    </a>
-
-    <a href="{{url_for('diveagar')}}">
-      <div class="card">
-        <img src="static/images/Diveagar beach.jpg">
-        <div class="card-content">
-          <h3>Diveagar</h3>
-          <p>A peaceful beach with a renowned Suvarna Ganesh Temple</p>
-        </div>
-      </div>
-    </a>
-
-    <a href="{{url_for('murud')}}">
-      <div class="card">
-        <img src="static/images/murud.jpg">
-        <div class="card-content">
-          <h3>Murud</h3>
-          <p>A calm white sand beach with Murud-Janjira fort nearby</p>
-        </div>
-      </div>
-    </a>
-
+    </div>
   </div>
+
 </div>
 
-<!-- Bottom Navigation -->
-<div class="nav">
-  <a href="dashboard.html" class="active">Home</a>
-  <a href="#">Saved</a>
-  <a href="#">Map</a>
-  <a href="#">Profile</a>
-  <a href="#">Settings</a>
+<!-- BOTTOM NAV (FIXED) -->
+<div class="bottom-nav">
+  <a href="/" class="active"><i class="fa fa-home"></i>Home</a>
+  <a href="/itinerary"><i class="fa fa-map"></i>Trips</a>
+  <a href="/explore"><i class="fa fa-compass"></i>Explore</a>
+  <a href="/profile"><i class="fa fa-user"></i>Profile</a>
 </div>
 
 </body>
+
 </html>
