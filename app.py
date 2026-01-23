@@ -224,6 +224,10 @@ def preplanned():
 def plan():
     return render_template('plan_now.html')
 
+@app.route('/trip')
+def trip():
+    return render_template('trip.html')
+
 # ---------------- RUN ----------------
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)
