@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>PlanNGo – Wildlife Sanctuaries</title>
+<title>PlanNGo – Maharashtra Beaches</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
@@ -97,8 +97,8 @@ font-size:12px;text-align:center;
 <body>
 
 <div class="header">
-<h2>Wildlife Sanctuaries</h2>
-<p style="font-size:13px;opacity:.9;">Nature & Forest Escapes</p>
+<h2>Maharashtra Beaches</h2>
+<p style="font-size:13px;opacity:.9;">Sea & Coastal Getaways</p>
 </div>
 
 <div id="tabs" class="tabs"></div>
@@ -107,7 +107,7 @@ font-size:12px;text-align:center;
 <script>
 let allData = []
 
-fetch("/static/data/wildlife.json")
+fetch("/static/data/beach.json")
 .then(r=>r.json())
 .then(data=>{
   allData = data

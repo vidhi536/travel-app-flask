@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>PlanNGo – Wildlife Sanctuaries</title>
+<title>PlanNGo – Museums</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
@@ -13,7 +13,7 @@
 body{margin:0;font-family:'Inter',sans-serif;background:#f6f7f9;}
 
 .header{
-background:linear-gradient(135deg,#ff5a5f,#ff9068);
+background:linear-gradient(135deg,#6a11cb,#2575fc);
 padding:18px;color:#fff;
 border-bottom-left-radius:20px;
 border-bottom-right-radius:20px;
@@ -24,7 +24,7 @@ border-bottom-right-radius:20px;
 padding:8px 14px;border-radius:20px;background:#fff;
 font-size:13px;cursor:pointer;white-space:nowrap;
 }
-.tab.active{background:#ff5a5f;color:#fff;}
+.tab.active{background:#2575fc;color:#fff;}
 
 .section{padding:16px;}
 .city-section{margin-bottom:24px;}
@@ -51,7 +51,6 @@ object-fit:cover;
 
 .card-content{
 padding:10px;
-position:relative;
 padding-bottom:36px;
 }
 
@@ -65,7 +64,7 @@ bottom:8px;
 font-size:10px;
 padding:5px 10px;
 border-radius:12px;
-background:#ff5a5f;
+background:#2575fc;
 color:#fff;
 text-decoration:none;
 font-weight:600;
@@ -73,7 +72,7 @@ font-weight:600;
 
 .badge{
 position:absolute;top:8px;left:8px;
-background:#ff5a5f;color:#fff;
+background:#2575fc;color:#fff;
 font-size:10px;padding:4px 8px;border-radius:20px;
 }
 
@@ -89,7 +88,7 @@ text-decoration:none;color:#777;
 font-size:12px;text-align:center;
 }
 
-.bottom-nav a.active{color:#ff5a5f;}
+.bottom-nav a.active{color:#2575fc;}
 .content{padding-bottom:90px;}
 </style>
 </head>
@@ -97,8 +96,8 @@ font-size:12px;text-align:center;
 <body>
 
 <div class="header">
-<h2>Wildlife Sanctuaries</h2>
-<p style="font-size:13px;opacity:.9;">Nature & Forest Escapes</p>
+<h2>Museums of Maharashtra</h2>
+<p style="font-size:13px;opacity:.9;">History • Art • Culture</p>
 </div>
 
 <div id="tabs" class="tabs"></div>
@@ -107,7 +106,7 @@ font-size:12px;text-align:center;
 <script>
 let allData = []
 
-fetch("/static/data/wildlife.json")
+fetch("/static/data/museums.json")
 .then(r=>r.json())
 .then(data=>{
   allData = data

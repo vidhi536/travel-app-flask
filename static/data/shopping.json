@@ -1,0 +1,41 @@
+[
+  
+  {"city":"Mumbai","title":"Colaba Causeway","desc":"Street shopping, souvenirs & fashion","img":"colaba.jpg"},
+  {"city":"Mumbai","title":"Crawford Market","desc":"Wholesale fruits, spices & goods","img":"crawford.jpg"},
+  {"city":"Mumbai","title":"Linking Road Bandra","desc":"Trendy clothes & footwear","img":"linking_road.jpg"},
+  {"city":"Mumbai","title":"Fashion Street","desc":"Budget fashion market","img":"fashion_street.jpg"},
+  {"city":"Mumbai","title":"Zaveri Bazaar","desc":"Gold & jewellery hub","img":"zaveri.jpg"},
+
+ 
+  {"city":"Pune","title":"Laxmi Road","desc":"Traditional shopping hub","img":"laxmi_road.jpg"},
+  {"city":"Pune","title":"Tulsi Baug","desc":"Affordable clothes & accessories","img":"tulsi_baug.jpg"},
+  {"city":"Pune","title":"FC Road","desc":"Youth fashion & cafes","img":"fc_road.jpg"},
+  {"city":"Pune","title":"Juna Bazaar","desc":"Antiques & flea market","img":"juna_bazaar.jpg"},
+
+ 
+  {"city":"Nashik","title":"Saraf Bazaar","desc":"Gold jewellery market","img":"saraf_bazaar.jpg"},
+  {"city":"Nashik","title":"Main Road Market","desc":"Local clothes & utensils","img":"nashik_market.jpg"},
+
+
+  {"city":"Nagpur","title":"Sitabuldi Main Road","desc":"Central shopping area","img":"sitabuldi.jpg"},
+  {"city":"Nagpur","title":"Itwari Market","desc":"Textiles & wholesale goods","img":"itwari.jpg"},
+
+ 
+  {"city":"Kolhapur","title":"Mahalaxmi Market","desc":"Traditional Kolhapuri items","img":"mahalaxmi_market.jpg"},
+  {"city":"Kolhapur","title":"Shahupuri","desc":"Jewellery & clothing","img":"shahupuri.jpg"},
+
+
+  {"city":"Aurangabad","title":"Gul Mandi","desc":"Famous local bazaar","img":"gul_mandi.jpg"},
+  {"city":"Aurangabad","title":"Paithan Gate","desc":"Paithani sarees","img":"paithan_gate.jpg"},
+
+ 
+  {"city":"Solapur","title":"City Market","desc":"Textiles & chaddars","img":"solapur_market.jpg"},
+
+ 
+  {"city":"Sangli","title":"Ganapati Peth","desc":"Main shopping street","img":"ganapati_peth.jpg"},
+
+  {"city":"Ratnagiri","title":"Ratnagiri Market","desc":"Local Konkan products","img":"ratnagiri_market.jpg"},
+
+
+  {"city":"Shirdi","title":"Sai Bazaar","desc":"Religious souvenirs","img":"sai_bazaar.jpg"}
+]

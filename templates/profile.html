@@ -1,13 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 <meta charset="UTF-8">
 <title>My Profile – PlanNGo</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
 
 <style>
+
+
+
 body{
   margin:0;
   font-family:'Inter',sans-serif;
@@ -53,6 +58,37 @@ body{
   text-decoration:none;
   border-radius:18px;
   font-size:13px;
+}
+
+.bottom-nav{
+  position:fixed;
+  bottom:0;
+  left:0;
+  right:0;
+  background:#fff;
+  display:flex;
+  justify-content:space-around;
+  padding:10px 0;
+  box-shadow:0 -6px 20px rgba(0,0,0,.12);
+  z-index:9999;   /* ⭐ ADD THIS */
+}
+
+
+.bottom-nav a{
+  text-decoration:none;
+  color:#777;
+  font-size:12px;
+  text-align:center;
+}
+
+.bottom-nav i{
+  display:block;
+  font-size:18px;
+  margin-bottom:4px;
+}
+
+.bottom-nav a.active{
+  color:#113acf;
 }
 
 /* ===== account list ===== */
@@ -106,9 +142,9 @@ body{
 
 <div class="profile-card">
 
-  {% if logged_in %}
+  {% if session.get('user') %}
 
-    <h2>{{ user['first_name'] }}</h2>
+    <h2>{{ user['name'] }}</h2>
     <p>{{ user['email'] }}</p>
     <a href="/logout" class="logout">Logout</a>
 
@@ -125,7 +161,7 @@ body{
 
 <div class="account">
 
-  {% if logged_in %}
+  {% if session.get('user') %}
   <a href="/pf" class="account-item">
   {% else %}
   <a href="#" class="account-item" onclick="alert('First login')">
@@ -172,6 +208,14 @@ body{
     <div class="arrow">&#8250;</div>
   </div>
 
+</div>
+
+<!-- BOTTOM NAV -->
+ <div class="bottom-nav">
+  <a href="/" class="active"><i class="fa fa-home"></i>Home</a>
+  <a href="/trip"><i class="fa fa-map"></i>Trip</a>
+  <a href="/explore"><i class="fa fa-compass"></i>Explore</a>
+  <a href="/profile"><i class="fa fa-user"></i>Profile</a>
 </div>
 
 </body>

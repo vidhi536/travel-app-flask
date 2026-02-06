@@ -1,0 +1,52 @@
+[
+  {"city":"Mumbai","title":"Marine Drive Walk","desc":"Queen’s Necklace night experience","img":"Marine_drive.jpeg"},
+  {"city":"Mumbai","title":"Colaba Causeway","desc":"Street shopping & cafes","img":"Colaba.jpeg"},
+  {"city":"Mumbai","title":"Bandra Cafe Culture","desc":"Trendy cafes & street art","img":"Bandra.jpeg"},
+  {"city":"Mumbai","title":"Juhu Food Street","desc":"Famous Mumbai street food","img":"juhu_food.jpeg"},
+
+  {"city":"Pune","title":"FC Road","desc":"Youth street & food spots","img":"fcroad.jpeg"},
+  {"city":"Pune","title":"Koregaon Park","desc":"Cafes & nightlife","img":"KP.jpeg"},
+  {"city":"Pune","title":"Phoenix Mall","desc":"Shopping & entertainment","img":"phoenix_pune.jpg"},
+  {"city":"Pune","title":"Sinhagad Road Night Food","desc":"Late night food stalls","img":"sinhagad_food.jpg"},
+
+  {"city":"Nashik","title":"Sula Vineyards","desc":"Wine tasting experience","img":"sula.jpg"},
+  {"city":"Nashik","title":"College Road","desc":"Food & shopping hub","img":"college_road.jpg"},
+  {"city":"Nashik","title":"Godavari Ghat Walk","desc":"Spiritual riverfront","img":"godavari.jpg"},
+
+  {"city":"Nagpur","title":"Sitabuldi Market","desc":"Main shopping street","img":"sitabuldi.jpg"},
+  {"city":"Nagpur","title":"Futala Lake","desc":"Evening lights & snacks","img":"futala.jpg"},
+  {"city":"Nagpur","title":"Zero Mile","desc":"India center landmark","img":"zeromile.jpg"},
+
+  {"city":"Aurangabad","title":"Himroo Factory","desc":"Local textile craft","img":"himroo.jpg"},
+  {"city":"Aurangabad","title":"Prozone Mall","desc":"Shopping mall","img":"prozone.jpg"},
+
+  {"city":"Kolhapur","title":"Mahalaxmi Temple Area","desc":"Spiritual & market zone","img":"mahalaxmi.jpg"},
+  {"city":"Kolhapur","title":"Kolhapuri Food Tour","desc":"Spicy local cuisine","img":"kolhapur_food.jpg"},
+
+  {"city":"Solapur","title":"Textile Market","desc":"Famous chadar market","img":"solapur_market.jpg"},
+  {"city":"Solapur","title":"City Food Streets","desc":"Local snacks experience","img":"solapur_food.jpg"},
+
+  {"city":"Satara","title":"Kaas Plateau View","desc":"Seasonal flower valley drive","img":"kaas.jpg"},
+  {"city":"Satara","title":"City Sunset Points","desc":"Hill viewpoints","img":"satara_view.jpg"},
+
+  {"city":"Sangli","title":"Krishna River Walk","desc":"Riverfront evenings","img":"krishna.jpg"},
+  {"city":"Sangli","title":"Turmeric Market","desc":"Famous spice trade","img":"turmeric.jpg"},
+
+  {"city":"Ratnagiri","title":"Mango Farms Visit","desc":"Alphonso experience","img":"mango.jpg"},
+  {"city":"Ratnagiri","title":"Local Fish Thali","desc":"Konkan cuisine","img":"fish_thali.jpg"},
+
+  {"city":"Lonavala","title":"Chikki Shops","desc":"Famous sweet market","img":"chikki.jpg"},
+  {"city":"Lonavala","title":"Hill Cafe Stops","desc":"Highway cafes","img":"lonavala_cafe.jpg"},
+
+  {"city":"Mahabaleshwar","title":"Mapro Garden","desc":"Strawberry experience","img":"mapro.jpg"},
+  {"city":"Mahabaleshwar","title":"Market Street","desc":"Local products","img":"mahabaleshwar_market.jpg"},
+
+  {"city":"Amravati","title":"Rajkamal Square","desc":"City center vibe","img":"rajkamal.jpg"},
+  {"city":"Amravati","title":"Local Food Joints","desc":"Street snacks","img":"amravati_food.jpg"},
+
+  {"city":"Thane","title":"Upvan Lake","desc":"Peaceful city lake","img":"upvan.jpg"},
+  {"city":"Thane","title":"Viviana Mall","desc":"Mega shopping mall","img":"viviana.jpg"},
+
+  {"city":"Navi Mumbai","title":"Palm Beach Road","desc":"Scenic city drive","img":"palm_beach.jpg"},
+  {"city":"Navi Mumbai","title":"Seawoods Mall","desc":"Shopping & movies","img":"seawoods.jpg"}
+]

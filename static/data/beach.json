@@ -1,0 +1,26 @@
+[
+  {"city":"Mumbai","title":"Versova Beach","desc":"Less crowded sunset beach","img":"versova.jpg"},
+  {"city":"Mumbai","title":"Aksa Beach","desc":"Quiet beach in Malad","img":"aksa.jpg"},
+
+  {"city":"Raigad","title":"Nagaon Beach","desc":"Clean & water sports beach","img":"nagaon.jpg"},
+  {"city":"Raigad","title":"Mandwa Beach","desc":"Ferry access & resorts","img":"mandwa.jpg"},
+  {"city":"Raigad","title":"Kihim Beach","desc":"Nature & bird watching","img":"kihim.jpg"},
+  {"city":"Raigad","title":"Diveagar Beach","desc":"Peaceful Konkan beach","img":"diveagar.jpg"},
+  {"city":"Raigad","title":"Shrivardhan Beach","desc":"Historic coastal town","img":"shrivardhan.jpg"},
+  {"city":"Raigad","title":"Harihareshwar Beach","desc":"Temple + beach combo","img":"harihareshwar.jpg"},
+
+  {"city":"Ratnagiri","title":"Velneshwar Beach","desc":"Clean spiritual beach","img":"velneshwar.jpg"},
+  {"city":"Ratnagiri","title":"Guhagar Beach","desc":"Long untouched shoreline","img":"guhagar.jpg"},
+  {"city":"Ratnagiri","title":"Mandavi Beach","desc":"Near Ratnagiri city","img":"mandavi.jpg"},
+  {"city":"Ratnagiri","title":"Bhatye Beach","desc":"Wide calm beach","img":"bhatye.jpg"},
+
+  {"city":"Sindhudurg","title":"Malvan Beach","desc":"Fort & coral waters","img":"malvan.jpg"},
+  {"city":"Sindhudurg","title":"Vengurla Beach","desc":"White sand & hills","img":"vengurla.jpg"},
+  {"city":"Sindhudurg","title":"Bhogwe Beach","desc":"Hidden scenic beach","img":"bhogwe.jpg"},
+  {"city":"Sindhudurg","title":"Shiroda Beach","desc":"Clean & less crowded","img":"shiroda.jpg"},
+  {"city":"Sindhudurg","title":"Redi Beach","desc":"Border coastal beach","img":"redi.jpg"},
+
+  {"city":"Palghar","title":"Dahanu Beach","desc":"Chikoo farms nearby","img":"dahanu.jpg"},
+  {"city":"Palghar","title":"Bordi Beach","desc":"Tree-lined beach","img":"bordi.jpg"},
+  {"city":"Palghar","title":"Satpati Beach","desc":"Fishing village coast","img":"satpati.jpg"}
+]

@@ -1,0 +1,20 @@
+[
+  {"city":"Nagpur","title":"Tadoba Andhari Tiger Reserve","desc":"Top tiger reserve of Maharashtra","img":"tadoba.jpg"},
+  {"city":"Chandrapur","title":"Tadoba Buffer Zone","desc":"Dense forest safari zone","img":"tadoba_buffer.jpg"},
+
+  {"city":"Gondia","title":"Navegaon National Park","desc":"Lake & bird paradise","img":"navegaon.jpg"},
+
+  {"city":"Amravati","title":"Melghat Tiger Reserve","desc":"Satpura forest reserve","img":"melghat.jpg"},
+
+  {"city":"Pune","title":"Bhigwan Bird Sanctuary","desc":"Flamingo watching spot","img":"bhigwan.jpg"},
+
+  {"city":"Mumbai","title":"Sanjay Gandhi National Park","desc":"Urban forest & safari","img":"sgnp.jpg"},
+
+  {"city":"Thane","title":"Tansa Wildlife Sanctuary","desc":"Forest & dam ecosystem","img":"tansa.jpg"},
+
+  {"city":"Nashik","title":"Kalsubai Harishchandragad Sanctuary","desc":"Western Ghats biodiversity","img":"kalsubai.jpg"},
+
+  {"city":"Kolhapur","title":"Radhanagari Sanctuary","desc":"Indian bison reserve","img":"radhanagari.jpg"},
+
+  {"city":"Sindhudurg","title":"Amboli Reserve Forest","desc":"Western ghats rainforest","img":"amboli.jpg"}
+]

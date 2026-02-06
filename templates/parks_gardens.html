@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>PlanNGo – Parks & Gardens</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+
+<style>
+*{box-sizing:border-box;}
+body{margin:0;font-family:'Inter',sans-serif;background:#f6f7f9;}
+
+.header{
+background:linear-gradient(135deg,#ff5a5f,#ff9068);
+padding:18px;color:#fff;
+border-bottom-left-radius:20px;
+border-bottom-right-radius:20px;
+}
+
+.tabs{display:flex;gap:8px;padding:12px;overflow-x:auto;}
+.tab{padding:8px 14px;border-radius:20px;background:#fff;font-size:13px;cursor:pointer;}
+.tab.active{background:#ff5a5f;color:#fff;}
+
+.section{padding:16px;}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+
+.card{
+position:relative;background:#fff;border-radius:16px;
+overflow:hidden;box-shadow:0 6px 18px rgba(0,0,0,.08);
+}
+
+.card img{width:100%;height:120px;object-fit:cover;}
+
+.card-content{
+padding:10px;
+position:relative;
+padding-bottom:36px;
+}
+
+.card-content h4{margin:0;font-size:14px;}
+.card-content p{margin:4px 0;font-size:12px;color:#666;}
+
+.plan-btn{
+position:absolute;
+right:10px;
+bottom:8px;
+font-size:10px;
+padding:5px 10px;
+border-radius:12px;
+background:#ff5a5f;
+color:#fff;
+text-decoration:none;
+font-weight:600;
+}
+
+.badge{
+position:absolute;top:8px;left:8px;
+background:#ff5a5f;color:#fff;
+font-size:10px;padding:4px 8px;border-radius:20px;
+}
+
+.bottom-nav{
+position:fixed;bottom:0;left:0;right:0;
+background:#fff;display:flex;
+justify-content:space-around;padding:10px 0;
+box-shadow:0 -6px 20px rgba(0,0,0,.12);
+}
+
+.bottom-nav a{text-decoration:none;color:#777;font-size:12px;text-align:center;}
+.bottom-nav a.active{color:#ff5a5f;}
+.content{padding-bottom:90px;}
+</style>
+</head>
+
+<body>
+
+<div class="header">
+<h2>Parks & Gardens</h2>
+<p style="font-size:13px;opacity:.9;">Green Spaces of Maharashtra</p>
+</div>
+
+<div id="tabs" class="tabs"></div>
+<div id="content" class="content"></div>
+
+<script>
+let allData=[]
+
+fetch("/static/data/parks_gardens.json")
+.then(r=>r.json())
+.then(data=>{
+ allData=data
+ buildTabs()
+ buildSections()
+})
+
+function buildTabs(){
+ const tabs=document.getElementById("tabs")
+ const cities=[...new Set(allData.map(x=>x.city))]
+ tabs.innerHTML=`<div class="tab active" onclick="filterCity('all',this)">All</div>`+
+ cities.map(c=>`<div class="tab" onclick="filterCity('${c.toLowerCase()}',this)">${c}</div>`).join("")
+}
+
+function buildSections(){
+ const groups={}
+ allData.forEach(x=>{
+  if(!groups[x.city]) groups[x.city]=[]
+  groups[x.city].push(x)
+ })
+
+ content.innerHTML=Object.keys(groups).map(city=>`
+ <div class="section city ${city.toLowerCase()}">
+ <h3>${city}</h3>
+ <div class="grid">
+ ${groups[city].map(item=>`
+   <div class="card">
+    <span class="badge">${item.city}</span>
+    <img src="/static/images/${item.img}">
+    <div class="card-content">
+      <h4>${item.title}</h4>
+      <p>${item.desc}</p>
+      <a href="/check_login_trip" class="plan-btn">Plan Trip</a>
+    </div>
+   </div>`).join("")}
+ </div></div>`).join("")
+}
+
+function filterCity(city,el){
+ document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'))
+ el.classList.add('active')
+ document.querySelectorAll('.city').forEach(sec=>{
+  sec.style.display=(city==='all'||sec.classList.contains(city))?'block':'none'
+ })
+}
+</script>
+
+<div class="bottom-nav">
+<a href="/"><i class="fa fa-home"></i><br>Home</a>
+<a href="/trip"><i class="fa fa-map"></i><br>Trips</a>
+<a href="/explore" class="active"><i class="fa fa-compass"></i><br>Explore</a>
+<a href="/profile"><i class="fa fa-user"></i><br>Profile</a>
+</div>
+
+</body>
+</html>
