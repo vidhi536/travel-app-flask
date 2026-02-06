@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>PlanNGo – Winter Destinations</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+
+<style>
+*{box-sizing:border-box;}
+
+body{
+  margin:0;
+  font-family:'Inter',sans-serif;
+  background:#f6f7f9;
+  color:#222;
+}
+
+/* HEADER */
+.header{
+  background:#113acf;
+  padding:16px;
+  border-bottom-left-radius:20px;
+  border-bottom-right-radius:20px;
+  color:#fff;
+}
+
+.header-top{
+  display:flex;
+  align-items:center;
+}
+
+/* PAGE */
+.page{
+  height:100vh;
+  display:flex;
+  flex-direction:column;
+}
+
+.content{
+  flex:1;
+  overflow-y:auto;
+  padding:16px;
+  padding-bottom:140px;
+}
+
+/* TITLE */
+.section-title{
+  font-size:18px;
+  font-weight:600;
+  margin-bottom:14px;
+}
+
+/* GRID */
+.destination-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:14px;
+}
+
+/* CARD */
+.trend-card{
+  height:200px;
+  border-radius:16px;
+  overflow:hidden;
+  position:relative;
+  background:#000;
+}
+
+.trend-card img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+/* OVERLAY */
+.trend-card::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(to top, rgba(0,0,0,.75), rgba(0,0,0,.25));
+}
+
+/* CONTENT */
+.card-content{
+  position:absolute;
+  inset:0;
+  padding:12px;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-end;
+  color:#fff;
+  z-index:2;
+}
+
+.card-content h4{
+  margin:0;
+  font-size:14px;
+  font-weight:600;
+}
+
+.distance{
+  font-size:11px;
+  margin:4px 0;
+  display:flex;
+  alignates-items:center;
+  gap:4px;
+  opacity:.9;
+}
+
+.distance i{
+  font-size:10px;
+}
+
+.card-content p{
+  font-size:11px;
+  line-height:1.35;
+  margin:6px 0 10px;
+  opacity:.95;
+}
+
+/* BUTTON */
+.plan-btn{
+  align-self:flex-start;
+  font-size:11px;
+  padding:6px 12px;
+  border-radius:14px;
+  background:#ffffff;
+  color:#113acf;
+  text-decoration:none;
+  font-weight:600;
+}
+
+/* BOTTOM NAV */
+.bottom-nav{
+  position:fixed;
+  bottom:0;
+  left:0;
+  right:0;
+  background:#fff;
+  display:flex;
+  justify-content:space-around;
+  padding:10px 0;
+  box-shadow:0 -6px 20px rgba(0,0,0,.12);
+}
+
+.bottom-nav a{
+  text-decoration:none;
+  color:#777;
+  font-size:12px;
+  text-align:center;
+}
+
+.bottom-nav i{
+  display:block;
+  font-size:18px;
+  margin-bottom:4px;
+}
+
+.bottom-nav a.active{
+  color:#113acf;
+}
+</style>
+</head>
+
+<body>
+
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-top">
+      <h1>Winter Destinations</h1>
+    </div>
+  </div>
+
+  <!-- CONTENT -->
+  <div class="content">
+
+    <div class="section-title">Best Places To Visit In Winter</div>
+
+    <div class="destination-grid">
+
+      <!-- Mahabaleshwar -->
+      <div class="trend-card">
+        <img src="{{ url_for('static', filename='images/mahableshwar.jpeg') }}">
+        <div class="card-content">
+          <h4>Mahabaleshwar</h4>
+          <div class="distance"><i class="fa fa-location-dot"></i> 260 km from Mumbai</div>
+          <p>Cool weather, foggy mornings and winter strawberries.</p>
+          <a href="/check_login_trip" class="plan-btn">Plan Trip</a>
+        </div>
+      </div>
+
+      <!-- Panchgani -->
+      <div class="trend-card">
+        <img src="{{ url_for('static', filename='images/panchgani.jpeg') }}">
+        <div class="card-content">
+          <h4>Panchgani</h4>
+          <div class="distance"><i class="fa fa-location-dot"></i> 245 km from Mumbai</div>
+          <p>Pleasant winter climate and scenic table land views.</p>
+          <a href="/check_login_trip" class="plan-btn">Plan Trip</a>
+        </div>
+      </div>
+
+      <!-- Ajanta -->
+      <div class="trend-card">
+        <img src="{{ url_for('static', filename='images/AE.jpeg') }}">
+        <div class="card-content">
+          <h4>Ajanta Caves</h4>
+          <div class="distance"><i class="fa fa-location-dot"></i> 330 km from Pune</div>
+          <p>Perfect winter weather to explore ancient caves.</p>
+          <a href="/check_login_trip" class="plan-btn">Plan Trip</a>
+        </div>
+      </div>
+
+      <!-- Ellora -->
+      <div class="trend-card">
+        <img src="{{ url_for('static', filename='images/Ellora Caves.jpg') }}">
+        <div class="card-content">
+          <h4>Ellora Caves</h4>
+          <div class="distance"><i class="fa fa-location-dot"></i> 300 km from Pune</div>
+          <p>Rock-cut architecture best visited in winter.</p>
+          <a href="/check_login_trip" class="plan-btn">Plan Trip</a>
+        </div>
+      </div>
+
+      <!-- Ganpatipule -->
+      <div class="trend-card">
+        <img src="{{ url_for('static', filename='images/Ganapatipule.jpg') }}">
+        <div class="card-content">
+          <h4>Ganpatipule</h4>
+          <div class="distance"><i class="fa fa-location-dot"></i> 375 km from Mumbai</div>
+          <p>Cool coastal breeze and clean winter beaches.</p>
+          <a href="/check_login_trip" class="plan-btn">Plan Trip</a>
+        </div>
+      </div>
+
+      <!-- Tarkarli -->
+      <div class="trend-card">
+        <img src="{{ url_for('static', filename='images/Tarkarli.jpg') }}">
+        <div class="card-content">
+          <h4>Tarkarli</h4>
+          <div class="distance"><i class="fa fa-location-dot"></i> 470 km from Mumbai</div>
+          <p>Best season for scuba diving and clear waters.</p>
+          <a href="/check_login_trip" class="plan-btn">Plan Trip</a>
+        </div>
+      </div>
+
+      <!-- Bhandardara -->
+      <div class="trend-card">
+        <img src="{{ url_for('static', filename='images/bhandardara.jpeg') }}">
+        <div class="card-content">
+          <h4>Bhandardara</h4>
+          <div class="distance"><i class="fa fa-location-dot"></i> 165 km from Mumbai</div>
+          <p>Chilly nights and serene lakeside views.</p>
+          <a href="/check_login_trip" class="plan-btn">Plan Trip</a>
+        </div>
+      </div>
+
+      <!-- Chikhaldara -->
+      <div class="trend-card">
+        <img src="{{ url_for('static', filename='images/Chikhaldara.jpeg') }}">
+        <div class="card-content">
+          <h4>Chikhaldara</h4>
+          <div class="distance"><i class="fa fa-location-dot"></i> 690 km from Mumbai</div>
+          <p>Coolest hill station of Vidarbha in winter.</p>
+         <a href="/check_login_trip" class="plan-btn">Plan Trip</a>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- BOTTOM NAV -->
+  <div class="bottom-nav">
+    <a href="/"><i class="fa fa-home"></i>Home</a>
+    <a href="/trip"><i class="fa fa-map"></i>Trip</a>
+    <a href="/explore" class="active"><i class="fa fa-compass"></i>Explore</a>
+    <a href="/profile"><i class="fa fa-user"></i>Profile</a>
+  </div>
+
+</div>
+
+</body>
+</html>

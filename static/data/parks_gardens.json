@@ -1,0 +1,28 @@
+[
+  {"city":"Mumbai","title":"Hanging Gardens","desc":"Terraced garden with city view","img":"hanging_garden.jpg"},
+  {"city":"Mumbai","title":"Sanjay Gandhi National Park","desc":"Urban national park","img":"sgnp.jpg"},
+  {"city":"Mumbai","title":"Horniman Circle Garden","desc":"Heritage garden","img":"horniman.jpg"},
+
+  {"city":"Pune","title":"Saras Baug","desc":"Historic garden with temple","img":"sarasbaug.jpg"},
+  {"city":"Pune","title":"Okayama Friendship Garden","desc":"Japanese style garden","img":"okayama.jpg"},
+  {"city":"Pune","title":"Empress Garden","desc":"Botanical garden","img":"empress.jpg"},
+
+  {"city":"Thane","title":"Upvan Garden","desc":"Garden beside Upvan lake","img":"upvan_garden.jpg"},
+  {"city":"Thane","title":"Butterfly Garden","desc":"Nature themed park","img":"butterfly_thane.jpg"},
+
+  {"city":"Nagpur","title":"Japanese Garden","desc":"Peaceful themed garden","img":"japanese_nagpur.jpg"},
+  {"city":"Nagpur","title":"Ambazari Garden","desc":"Lake side park","img":"ambazari.jpg"},
+
+  {"city":"Nashik","title":"Pandavleni Garden","desc":"Garden near caves","img":"pandavleni_garden.jpg"},
+  {"city":"Nashik","title":"Godavari Garden","desc":"River side park","img":"godavari_garden.jpg"},
+
+  {"city":"Aurangabad","title":"Siddharth Garden","desc":"Zoo & garden","img":"siddharth_garden.jpg"},
+  {"city":"Aurangabad","title":"Himayat Bagh","desc":"Mughal era garden","img":"himayat_bagh.jpg"},
+
+  {"city":"Kolhapur","title":"New Palace Garden","desc":"Royal palace garden","img":"kolhapur_palace_garden.jpg"},
+  {"city":"Kolhapur","title":"Rankala Garden","desc":"Lake side park","img":"rankala_garden.jpg"},
+
+  {"city":"Solapur","title":"Indira Gandhi Garden","desc":"City park","img":"solapur_garden.jpg"},
+
+  {"city":"Satara","title":"Char Bhinti Garden","desc":"Hill view garden","img":"charbhinti.jpg"}
+]

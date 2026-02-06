@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>PlanNGo – Wildlife Sanctuaries</title>
+<title>PlanNGo – Spiritual Places</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
@@ -58,6 +58,7 @@ padding-bottom:36px;
 .card-content h4{margin:0;font-size:14px;}
 .card-content p{margin:4px 0 0;font-size:12px;color:#666;}
 
+/* PLAN BUTTON — overlay bottom right */
 .plan-btn{
 position:absolute;
 right:10px;
@@ -97,22 +98,28 @@ font-size:12px;text-align:center;
 <body>
 
 <div class="header">
-<h2>Wildlife Sanctuaries</h2>
-<p style="font-size:13px;opacity:.9;">Nature & Forest Escapes</p>
+<h2>Spiritual Places</h2>
+<p style="font-size:13px;opacity:.9;">Temples • Pilgrimage • Sacred Sites</p>
 </div>
 
+<!-- TABS -->
 <div id="tabs" class="tabs"></div>
+
+<!-- CONTENT -->
 <div id="content" class="content"></div>
 
 <script>
 let allData = []
 
-fetch("/static/data/wildlife.json")
+fetch("/static/data/spiritual_places.json")
 .then(r=>r.json())
 .then(data=>{
   allData = data
   buildTabs()
   buildSections()
+})
+.catch(e=>{
+  document.body.innerHTML += "<h3 style='padding:20px'>Spiritual JSON load error</h3>"
 })
 
 function buildTabs(){
@@ -146,7 +153,11 @@ function buildSections(){
             <div class="card-content">
               <h4>${item.title}</h4>
               <p>${item.desc}</p>
-              <a href="/check_login_trip" class="plan-btn">Plan Trip</a>
+
+              <a href="/check_login_trip" class="plan-btn">
+                Plan Trip
+              </a>
+
             </div>
           </div>
         `).join("")}
@@ -167,6 +178,7 @@ function filterCity(city, el){
 }
 </script>
 
+<!-- BOTTOM NAV -->
 <div class="bottom-nav">
 <a href="/"><i class="fa fa-home"></i><br>Home</a>
 <a href="/trip"><i class="fa fa-map"></i><br>Trips</a>

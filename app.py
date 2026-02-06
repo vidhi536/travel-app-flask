@@ -1,5 +1,10 @@
-from flask import Flask, render_template, request, redirect, session
+from flask import Flask, render_template, request, redirect, session,jsonify
+from dotenv import load_dotenv
+import os
 import sqlite3
+import requests
+import math
+
 
 app = Flask(__name__)
 app.secret_key = "planngo_secret_key"
@@ -10,7 +15,6 @@ def get_db():
     conn.row_factory = sqlite3.Row
     return conn
 
-# Create table if not exists
 with get_db() as db:
     db.execute("""
         CREATE TABLE IF NOT EXISTS users (
@@ -20,6 +24,32 @@ with get_db() as db:
             password TEXT
         )
     """)
+# ---------------- helper function ----------------
+def call_huggingface(prompt):
+    url = f"https://api-inference.huggingface.co/models/{HUGGINGFACE_MODEL}"
+    headers = {"Authorization": f"Bearer {HUGGINGFACE_API_KEY}"}
+    data = {"inputs": prompt}
+    response = requests.post(url, headers=headers, json=data)
+    try:
+        res_json = response.json()
+        if isinstance(res_json, list) and "generated_text" in res_json[0]:
+            return res_json[0]["generated_text"]
+        elif "error" in res_json:
+            return f"Error from AI: {res_json['error']}"
+        else:
+            return "Could not generate itinerary"
+    except Exception as e:
+        return f"Exception: {e}"
+
+# ---------------- DISTANCE FUNCTION ----------------
+def calculate_distance(lat1, lon1, lat2, lon2):
+    R = 6371
+    dlat = math.radians(lat2-lat1)
+    dlon = math.radians(lon2-lon1)
+    a = math.sin(dlat/2)**2 + math.cos(math.radians(lat1)) * \
+        math.cos(math.radians(lat2)) * math.sin(dlon/2)**2
+    c = 2 * math.atan2(math.sqrt(1-a))
+    return round(R * c, 2)
 
 # ---------------- HOME ----------------
 @app.route('/')
@@ -33,7 +63,6 @@ def home():
         ).fetchone()
 
     return render_template('welcome.html', user=user)
-
 
 # ---------------- MAP ----------------
 @app.route('/map')
@@ -59,6 +88,7 @@ def login():
 
         if user:
             session['user_id'] = user['id']
+            session['user'] = user['name']
             return redirect('/')
         else:
             return "Invalid email or password"
@@ -89,143 +119,47 @@ def signup():
             return "Email already exists"
 
     return render_template('signup.html')
-# ---------------- Hill-Forts ----------------
-@app.route('/hill_forts')
-def hill_forts():
-    return render_template('hill_forts.html')
 
-@app.route('/raigad')
-def raigad():
-    return render_template('hill-forts/raigad.html')
+# ---------------- CHECK LOGIN FOR PLAN TRIP ----------------
+@app.route('/check_login_trip')
+def check_login_trip():
+    if session.get('user'):
+        return redirect('/trip')
+    else:
+        return redirect('/login')
 
-@app.route('/lohagad')
-def lohagad():
-    return render_template('hill-forts/lohagad.html')
+# ---------------- AI FORT SEARCH ----------------
+@app.route("/fort")
+def fort_page():
+    return render_template("fort.html")
 
-@app.route('/rajgad')
-def rajgad():
-    return render_template('hill-forts/rajgad.html')
+@app.route("/find_fort", methods=["POST"])
+def find_fort():
+    fort_name = request.form["fort_name"]
 
-@app.route('/pratapgad')
-def pratapgad():
-    return render_template('hill-forts/pratapgad.html')
+    user_lat = 18.5204
+    user_lon = 73.8567
 
-@app.route('/harishchandragad')
-def harishchandragad():
-    return render_template('hill-forts/harishchandragad.html')
+    url = f"https://nominatim.openstreetmap.org/search?q={fort_name}&format=json"
+    res = requests.get(url, headers={"User-Agent":"plango"})
+    data = res.json()
 
-@app.route('/sinhagad')
-def sinhagad():
-    return render_template('hill-forts/sinhagad.html')
+    if len(data) == 0:
+        return render_template("fort.html",
+            result={"name":fort_name,"location":"Not Found","distance":"N/A"})
 
-@app.route('/visapur')
-def visapur():
-    return render_template('hill-forts/visapur.html')
+    lat = float(data[0]["lat"])
+    lon = float(data[0]["lon"])
+    location = data[0]["display_name"]
 
-@app.route('/torna')
-def torna():
-    return render_template('hill-forts/torna.html')
+    distance = calculate_distance(user_lat,user_lon,lat,lon)
 
-@app.route('/daulatabad')
-def daulatabad():
-    return render_template('hill-forts/daulatabad.html')
-
-
-# ---------------- Beaches ----------------
-@app.route('/Konkan')
-def beaches():
-    return render_template('Konkan.html')
-
-@app.route('/ganpatipule')
-def ganpatipule():
-    return render_template('Beach/ganpatipule.html')
-
-@app.route('/alibaug')
-def alibaug():
-    return render_template('Beach/alibaug.html')
-
-@app.route('/diveagar')
-def diveagar():
-    return render_template('Beach/diveagar.html')
-
-@app.route('/harihareshwar')
-def harihareshwar():
-    return render_template('Beach/harihareshwar.html')
-
-@app.route('/kashid')
-def kashid():
-    return render_template('Beach/kashid.html')
-
-@app.route('/murud')
-def murud():
-    return render_template('Beach/murud.html')
-
-@app.route('/tarkarli')
-def tarkarli():
-    return render_template('Beach/tarkarli.html')
-
-
-# ---------------- Historical places ----------------
-@app.route('/ajanta_ellora')
-def Historical_places():
-    return render_template('ajanta_ellora.html')
-
-@app.route('/ajanta')
-def ajanta():
-    return render_template('historical_places/ajanta.html')
-
-@app.route('/ellora')
-def ellora():
-    return render_template('historical_places/ellora.html')
-
-@app.route('/bibi')
-def bibi():
-    return render_template('historical_places/bibi.html')
-
-@app.route('/girshneshwar')
-def girshneshwar():
-    return render_template('historical_places/girshneshwar.html')
-
-@app.route('/kailasa')
-def kailasa():
-    return render_template('historical_places/kailasa.html')
-
-
-# ---------------- Wildlife ----------------
-@app.route('/Wildlife')
-def Wildlife():
-    return render_template('Wildlife.html')
-
-@app.route('/tadoba')
-def tadoba():
-    return render_template('wildlife/tadoba.html')
-
-@app.route('/bhigwan')
-def bhigwan():
-    return render_template('wildlife/bhigwan.html')
-
-@app.route('/bhima')
-def bhima():
-    return render_template('wildlife/bhima.html')
-
-@app.route('/koyna')
-def koyna():
-    return render_template('wildlife/koyna.html')
-
-@app.route('/melghat')
-def melghat():
-    return render_template('wildlife/melghat.html')
-
-@app.route('/radha')
-def radha():
-    return render_template('wildlife/radha.html')
-
-@app.route('/sanjay')
-def sanjay():
-    return render_template('wildlife/sanjay.html')
-
-
-
+    return render_template("fort.html",
+        result={
+            "name":fort_name,
+            "location":location,
+            "distance":distance
+        })
 
 # ---------------- PROFILE ----------------
 @app.route('/profile')
@@ -247,15 +181,7 @@ def logout():
     session.clear()
     return redirect('/')
 
-# ---------------- OTHER ROUTES (UNCHANGED) ----------------
-@app.route('/search')
-def search():
-    return render_template('search.html')
-
-@app.route('/preplanned')
-def preplanned():
-    return render_template('preplanned.html')
-
+# ---------------- OTHER ROUTES ----------------
 @app.route('/explore')
 def explore():
     return render_template('explore.html')
@@ -264,9 +190,79 @@ def explore():
 def trip():
     return render_template('trip.html')
 
+@app.route('/search')
+def search():
+    return render_template('search.html')
+
+@app.route('/preplanned')
+def preplanned():
+    return render_template('preplanned.html')
+
+
+# ---------------- Hill-Forts ----------------
+@app.route("/hill_forts")
+def hill_forts():
+    return render_template("hill_forts.html")
+
+# ---------------- Beaches ----------------
+@app.route('/Beaches')
+def beaches():
+    return render_template('Beaches.html')
+
+# ---------------- Wildlife ----------------
+@app.route('/Wildlife')
+def wildlife():
+    return render_template('Wildlife.html')
+
+# ---------------- Seasonal ----------------
+@app.route('/Summer')
+def summer():
+    return render_template('Summer.html')
+
+@app.route('/Monsoon')
+def Monsoon():
+    return render_template('Monsoon.html')
+
+@app.route('/Winter')
+def Winter():
+    return render_template('Winter.html')
+
+# ---------------- CITY EXPERIENCES ----------------
+@app.route("/cityexp")
+def city_experiences():
+    return render_template("cityexp.html")
+
+# ---------------- Historical ----------------
+@app.route("/historical")
+def historical_places():
+    return render_template("historical.html")
+
+# ---------------- Historical ----------------
+@app.route("/spiritual_places")
+def spiritual_places():
+    return render_template("spiritual_places.html")
+
+# ---------------- Parks ----------------
+@app.route("/parks_gardens")
+def parks_gardens():
+    return render_template("parks_gardens.html")
+
+# ---------------- Museums ----------------
+@app.route("/museums")
+def museums():
+    return render_template("museums.html")
+
+# ---------------- shopping ----------------
+@app.route("/shopping")
+def shopping():
+    return render_template("shopping.html")
+
+# ---------------- Food ----------------
+@app.route("/food")
+def food():
+    return render_template("food.html")
+
 
 # ---------------- RUN ----------------
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000, debug=True)
-
-
+    app.run(host="0.0.0.0", port=5000, debug=True)

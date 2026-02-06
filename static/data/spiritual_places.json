@@ -1,0 +1,43 @@
+[
+  {"city":"Pune","title":"Alandi","desc":"Sant Dnyaneshwar Maharaj Samadhi","img":"aland i.jpg"},
+  {"city":"Pune","title":"Dehu","desc":"Sant Tukaram Maharaj Temple","img":"dehu.jpg"},
+  {"city":"Pune","title":"Jejuri","desc":"Khandoba Temple on hill","img":"jejuri.jpg"},
+
+  {"city":"Ahmednagar","title":"Shirdi","desc":"Sai Baba Samadhi Temple","img":"shirdi.jpg"},
+  {"city":"Ahmednagar","title":"Shani Shingnapur","desc":"Famous Shani Dev temple","img":"shani_shingnapur.jpg"},
+
+  {"city":"Nashik","title":"Trimbakeshwar","desc":"Jyotirlinga Shiva Temple","img":"trimbakeshwar.jpg"},
+  {"city":"Nashik","title":"Saptashrungi","desc":"Goddess temple on hill","img":"saptashrungi.jpg"},
+  {"city":"Nashik","title":"Panchavati","desc":"Ramayana spiritual area","img":"panchavati.jpg"},
+
+  {"city":"Kolhapur","title":"Mahalaxmi Temple","desc":"Shaktipeeth temple","img":"mahalaxmi_kolhapur.jpg"},
+  {"city":"Kolhapur","title":"Narsobachi Wadi","desc":"Datta temple pilgrimage","img":"narsobachi_wadi.jpg"},
+
+  {"city":"Solapur","title":"Pandharpur","desc":"Vitthal Rukmini Temple","img":"pandharpur.jpg"},
+  {"city":"Solapur","title":"Akkalkot","desc":"Swami Samarth Math","img":"akkalkot.jpg"},
+
+  {"city":"Satara","title":"Chaphal","desc":"Samarth Ramdas temple","img":"chaphal.jpg"},
+  {"city":"Satara","title":"Thoseghar Temple Area","desc":"Temple near waterfalls","img":"thoseghar_temple.jpg"},
+
+  {"city":"Raigad","title":"Harihareshwar Temple","desc":"Dakshin Kashi","img":"harihareshwar_temple.jpg"},
+  {"city":"Raigad","title":"Ballaleshwar Pali","desc":"Ashtavinayak temple","img":"pali.jpg"},
+
+  {"city":"Pune District","title":"Ranjangaon Ganpati","desc":"Ashtavinayak Mahaganpati","img":"ranjangaon.jpg"},
+  {"city":"Ahmednagar","title":"Siddhatek","desc":"Ashtavinayak Siddhivinayak","img":"siddhatek.jpg"},
+  {"city":"Raigad","title":"Mahad Varadvinayak","desc":"Ashtavinayak temple","img":"mahad_ganpati.jpg"},
+  {"city":"Raigad","title":"Ozar Ganpati","desc":"Vighnahar Ashtavinayak","img":"ozar.jpg"},
+  {"city":"Pune","title":"Theur Chintamani","desc":"Ashtavinayak temple","img":"theur.jpg"},
+  {"city":"Pune","title":"Morgaon Ganpati","desc":"Moreshwar Ashtavinayak","img":"morgaon.jpg"},
+  {"city":"Pune","title":"Lenyadri Ganpati","desc":"Cave temple Ashtavinayak","img":"lenyadri.jpg"},
+
+  {"city":"Mumbai","title":"Siddhivinayak","desc":"Famous Ganpati temple","img":"siddhivinayak.jpg"},
+  {"city":"Mumbai","title":"Mumbadevi Temple","desc":"City goddess temple","img":"mumbadevi.jpg"},
+  {"city":"Mumbai","title":"Haji Ali Dargah","desc":"Sea mosque shrine","img":"haji_ali.jpg"},
+
+  {"city":"Aurangabad","title":"Grishneshwar","desc":"Jyotirlinga temple","img":"grishneshwar.jpg"},
+  {"city":"Aurangabad","title":"Bhadra Maruti","desc":"Sleeping Hanuman idol","img":"bhadra_maruti.jpg"},
+
+  {"city":"Nanded","title":"Hazur Sahib","desc":"Major Sikh Gurudwara","img":"hazur_sahib.jpg"},
+
+  {"city":"Amravati","title":"Ambadevi Temple","desc":"Historic Devi temple","img":"ambadevi.jpg"}
+]

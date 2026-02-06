@@ -33,17 +33,6 @@ body{
   align-items:center;
 }
 
-.header h1{
-  margin:0;
-  font-size:22px;
-}
-
-.header p{
-  margin:4px 0 0;
-  font-size:13px;
-  opacity:.9;
-}
-
 /* AUTH BUTTONS */
 .auth-buttons{
   display:flex;
@@ -56,7 +45,6 @@ body{
   padding:6px 14px;
   border-radius:20px;
   font-weight:600;
-  transition:.3s;
 }
 
 .login-btn{
@@ -67,10 +55,6 @@ body{
 .signup-btn{
   background:#fff;
   color:#113acf;
-}
-
-.auth-buttons a:hover{
-  transform:scale(1.05);
 }
 
 /* BOTTOM NAV */
@@ -84,7 +68,9 @@ body{
   justify-content:space-around;
   padding:10px 0;
   box-shadow:0 -6px 20px rgba(0,0,0,.12);
+  z-index:9999;   /* ⭐ ADD THIS */
 }
+
 
 .bottom-nav a{
   text-decoration:none;
@@ -103,7 +89,7 @@ body{
   color:#113acf;
 }
 
-/* PAGE LAYOUT FIX */
+/* PAGE */
 .page{
   height:100vh;
   display:flex;
@@ -113,34 +99,35 @@ body{
 .content{
   flex:1;
   overflow-y:auto;
-  padding-bottom:120px; /* bottom nav sathi extra space */
+  padding-bottom:120px;  /* bottom nav height पेक्षा जास्त */
 }
 
 
-/* HERO SECTION (ADDED ONLY) */
+
+/* HERO */
 .hero{
   position:relative;
-  min-height:calc(100vh - 140px); /* header + bottom nav */
+  min-height:calc(100vh - 140px);
   margin:16px;
   border-radius:18px;
   background:url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e') center/cover no-repeat;
   overflow:hidden;
 }
 
-
 .hero::after{
   content:"";
   position:absolute;
   inset:0;
   background:rgba(0,0,0,.35);
+  pointer-events:none;   /* ⭐ ADD THIS */
 }
+
 
 .hero-content{
   position:absolute;
   inset:0;
   display:flex;
   flex-direction:column;
-  justify-content:center;
   align-items:center;
   text-align:center;
   color:#fff;
@@ -148,122 +135,135 @@ body{
   padding:20px;
 }
 
-.hero-content h1{
-  font-size:36px;
-  margin-bottom:10px;
-}
-
-.hero-content span{
-  color:#caa04c;
-}
-
-.hero-content p{
-  font-size:14px;
-  max-width:500px;
-}
-
-.search-box{
-  margin-top:30px;
-  background:#fff;
-  padding:12px;
-  border-radius:6px;
-  display:flex;
-  gap:10px;
-  flex-wrap:wrap;
-}
-
-.search-box input,
-.search-box select{
-  padding:10px;
-  border:1px solid #ddd;
-  border-radius:4px;
-  font-size:12px;
-}
-
-.search-box button{
-  background:#caa04c;
-  color:#fff;
-  border:none;
-  padding:10px 18px;
-  border-radius:4px;
-  font-size:12px;
-  cursor:pointer;
-}
-
+/* JOURNEY CARD */
 .journey-card{
   background:#ffffff;
   width:100%;
-  max-width:360px;
-  margin:30px auto 40px;
-  padding:20px 18px;
-  border-radius:20px;
-  box-shadow:0 12px 30px rgba(0,0,0,0.15);
+  max-width:380px;
+  padding:15px 26px;
+  border-radius:16px;
+  box-shadow:0 18px 40px rgba(0,0,0,.2);
 }
 
-/* Title */
+/* TITLE */
 .journey-card h3{
   text-align:center;
-  margin:0 0 16px;
-  font-size:16px;
-  font-weight:600;
   color:#113acf;
-  background:none;
-  padding:0;
+  font-size:20px;
+  font-weight:600;
+  margin-bottom:22px;
 }
 
-/* Grid */
+/* GRID */
 .journey-grid{
   display:grid;
   grid-template-columns:1fr 1fr;
-  gap:12px;
-  margin-bottom:16px;
+  gap:14px;
 }
 
-/* Inputs */
+/* DATE FULL WIDTH */
+.date-field{
+  grid-column:1 / -1;
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+}
+
+/* LABEL */
+.date-field label{
+  font-size:12px;
+  color:#555;
+  margin-left:6px;
+}
+
+/* INPUTS */
 .journey-grid input{
   width:100%;
-  padding:10px 12px;
-  border-radius:10px;
+  padding:14px 16px;
+  border-radius:14px;
   border:1px solid #ddd;
-  font-size:13px;
+  font-size:14px;
+  background:#f9fafc;
   outline:none;
+
+  appearance:none;
+  -webkit-appearance:none;
 }
 
+/* FOCUS */
 .journey-grid input:focus{
   border-color:#113acf;
+  background:#fff;
+  box-shadow:0 0 0 2px rgba(17,58,207,.15);
 }
 
-/* Date fields */
-.date-field{
-  grid-column:span 2;
+/* SEARCH BUTTON */
+.search-btn{
+  margin-top:22px;
+  width:100%;
+  padding:13px;
+  border:none;
+  border-radius:10px;
+  background:#113acf;
+  color:#fff;
+  font-size:15px;
+  font-weight:600;
+  cursor:pointer;
+}
+
+
+
+/* 🔥 TRENDING SECTION (NOW OUTSIDE HERO) */
+.trending-section{
+  background:#f6f7f9;
+  padding:10px 16px 20px;
+}
+
+.trending-title{
+  color:#222;
+  font-size:16px;
+  font-weight:600;
+  margin-bottom:12px;
+}
+
+.trending-row{
   display:flex;
-  gap:10px;
+  gap:14px;
+  overflow-x:auto;
 }
 
-.date-field label{
+.trending-row a{
+  text-decoration:none;
+  color:inherit;
+}
+
+.trending-row::-webkit-scrollbar{
   display:none;
 }
 
-/* Search button */
-.search-btn{
+.trend-card{
+  min-width:160px;
+  height:120px;
+  border-radius:16px;
+  overflow:hidden;
+  position:relative;
+  flex-shrink:0;
+}
+
+.trend-card img{
   width:100%;
-  padding:12px;
-  border:none;
-  border-radius:14px;
-  background:#113acf;
+  height:100%;
+  object-fit:cover;
+}
+
+.trend-card span{
+  position:absolute;
+  bottom:8px;
+  left:10px;
   color:#fff;
-  font-size:14px;
+  font-size:13px;
   font-weight:600;
-  cursor:pointer;
-  transition:.3s;
 }
-
-.search-btn:hover{
-  background:#0b2fa3;
-}
-
-
-
 </style>
 </head>
 
@@ -274,52 +274,47 @@ body{
   <!-- HEADER -->
   <div class="header">
     <div class="header-top">
-      <div>
-        <h1 style="display:flex; align-items:center;">
-          PlanNGo
-          <img src="/static/images/IMG_2814.PNG" alt="PlanNGo Logo" style="height:85px; display:block;">
-        </h1>
-
-
-        <p>Your smart travel itinerary partner</p>
-      </div>
-
+      <h1>PlanNGo</h1>
       <div class="auth-buttons">
-        <a href="/login" class="login-btn">Login</a>
-        <a href="/signup" class="signup-btn">Sign Up</a>
-      </div>
+        {% if session.get('user') %}
+          <span style="font-size:13px;">Hi, {{ session.get('user') }}</span>
+          <a href="/logout" class="login-btn">Logout</a>
+        {% else %}
+          <a href="/login" class="login-btn">Login</a>
+          <a href="/signup" class="signup-btn">Sign Up</a>
+         {% endif %}
+       </div>
+
     </div>
   </div>
 
-  <!-- SCROLLABLE CONTENT -->
+
+  <!-- CONTENT -->
   <div class="content">
 
+    <!-- HERO -->
     <div class="hero">
       <div class="hero-content">
         <h1>Enjoy The Travel With <span>PlanNGo</span></h1>
-        <p>
-          A journey of 1000 miles starts with a single step.
-          Import the full demo content with 1 click and create
-          a head-turning website for your travel agency.
-        </p>
+        <p>A journey of 1000 miles starts with a single step.</p>
 
        <div class="journey-card">
-  <h3>Plan Your Journey</h3>
+        <h3>Plan Your Journey</h3>
 
-  <div class="journey-grid">
-    <input type="text" placeholder="From">
-    <input type="text" placeholder="To">
+        <div class="journey-grid">
+          <input type="text" placeholder="From">
+          <input type="text" placeholder="To">
 
-    <div class="date-field">
-      <label>Start Date</label>
-      <input type="date">
+        <div class="date-field">
+          <label>Start Date</label>
+          <input type="date">
+        </div>
+
+        <div class="date-field">
+          <label>End Date</label>
+          <input type="date">
+        </div>
     </div>
-
-    <div class="date-field">
-      <label>End Date</label>
-      <input type="date">
-    </div>
-  </div>
 
   <button class="search-btn">Search</button>
 </div>
@@ -327,22 +322,82 @@ body{
       </div>
     </div>
 
+    <!-- Seasonal -->
+<div class="trending-section">
+  <div class="trending-title">Popular Seasonal Itineraries</div>
+
+  <div class="trending-row">
+
+    <a href="/Summer">
+      <div class="trend-card">
+        <img src="{{ url_for('static', filename='images/summer.jpg') }}">
+        <span>Summer</span>
+      </div>
+    </a>
+
+    <a href="/Monsoon">
+      <div class="trend-card">
+        <img src="{{ url_for('static', filename='images/monsoon.jpg') }}">
+        <span>Monsoon</span>
+      </div>
+    </a>
+
+    <a href="/Winter">
+      <div class="trend-card">
+        <img src="{{ url_for('static', filename='images/winter.jpg') }}">
+        <span>Winter</span>
+      </div>
+    </a>
+
+  </div>
+</div>
+
+<!-- ✅ TRENDING SECTION -->
+<div class="trending-section">
+  <div class="trending-title">Trending Places</div>
+
+  <div class="trending-row">
+
+    <a href="/Konkan">
+      <div class="trend-card">
+        <img src="{{ url_for('static', filename='images/Ganapatipule.jpg') }}">
+        <span>Beaches</span>
+      </div>
+    </a>
+
+    <a href="/hill_forts">
+      <div class="trend-card">
+        <img src="{{ url_for('static', filename='images/lohagad.jpeg') }}">
+        <span>Hills-Forts</span>
+      </div>
+    </a>
+
+    <a href="/ajanta_ellora">
+      <div class="trend-card">
+        <img src="{{ url_for('static', filename='images/AE.jpeg') }}">
+        <span>Historical Places</span>
+      </div>
+    </a>
+
+    <a href="/Wildlife">
+      <div class="trend-card">
+        <img src="{{ url_for('static', filename='images/Maharashtra Wildlife Package.jpeg') }}">
+        <span>Wildlife Sanctuary</span>
+      </div>
+    </a>
+
+  </div>
+</div>
+
   </div>
 
   <!-- BOTTOM NAV -->
-  <div class="bottom-nav">
-    <a href="/" class="active"><i class="fa fa-home"></i>Home</a>
-    <a href="/trip"><i class="fa fa-map"></i>Trips</a>
-    <a href="/explore"><i class="fa fa-compass"></i>Explore</a>
-    <a href="/profile">
-      <i class="fa fa-user"></i>
-      {% if user %}
-        {{ user['name'] }}
-      {% else %}
-        Profile
-      {% endif %}
-    </a>
-  </div>
+ <div class="bottom-nav">
+  <a href="/" class="active"><i class="fa fa-home"></i>Home</a>
+  <a href="/trip"><i class="fa fa-map"></i>Trip</a>
+  <a href="/explore"><i class="fa fa-compass"></i>Explore</a>
+  <a href="/profile"><i class="fa fa-user"></i>Profile</a>
+</div>
 
 </div>
 

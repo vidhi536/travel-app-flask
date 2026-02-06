@@ -44,62 +44,7 @@ body{
   opacity:.9;
 }
 
-/* AUTH BUTTONS */
-.auth-buttons{
-  display:flex;
-  gap:10px;
-}
-
-.auth-buttons a{
-  text-decoration:none;
-  font-size:12px;
-  padding:6px 14px;
-  border-radius:20px;
-  font-weight:600;
-  transition:.3s;
-}
-
-.login-btn{
-  color:#fff;
-  border:1px solid rgba(255,255,255,.8);
-}
-
-.signup-btn{
-  background:#fff;
-  color:#113acf;
-}
-
-.auth-buttons a:hover{
-  transform:scale(1.05);
-}
-
-/* CATEGORY CARD */
-.categories{
-  background:#fff;
-  margin:-25px 16px 16px;
-  padding:16px;
-  border-radius:18px;
-  box-shadow:0 10px 30px rgba(0,0,0,.1);
-  display:flex;
-  justify-content:space-between;
-}
-
-.cat{
-  text-align:center;
-  font-size:12px;
-  color:#444;
-}
-
-.cat i{
-  font-size:20px;
-  background:#ffe8e3;
-  color:#113acf;
-  padding:14px;
-  border-radius:50%;
-  margin-bottom:6px;
-}
-
-/* SERVICES */
+/* SECTION */
 .section{
   padding:16px;
 }
@@ -109,41 +54,15 @@ body{
   font-size:16px;
 }
 
-.services{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:12px;
-}
-
-.service-card{
-  background:#fff;
-  border-radius:16px;
-  padding:14px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  box-shadow:0 6px 18px rgba(0,0,0,.08);
-}
-
-.service-card span{
-  font-size:13px;
-  font-weight:600;
-}
-
-.service-card i{
-  font-size:18px;
-  color:#113acf;
-}
-
-/* TRENDING */
+/* 🔥 UPDATED – VERTICAL GRID */
 .trending{
-  display:flex;
-  gap:14px;
-  overflow-x:auto;
+  display:grid;
+  grid-template-columns:repeat(auto-fill, minmax(160px,1fr));
+  gap:16px;
 }
 
+/* CARD */
 .place{
-  min-width:180px;
   height:220px;
   border-radius:18px;
   background-size:cover;
@@ -169,22 +88,7 @@ body{
 
 .place h4{
   margin:0;
-}
-
-.place p{
-  margin:4px 0 0;
-  font-size:13px;
-}
-
-/* OFFER */
-.offer{
-  margin:16px;
-  background:linear-gradient(135deg,#7f00ff,#e100ff);
-  color:#fff;
-  padding:18px;
-  border-radius:18px;
-  font-size:14px;
-  font-weight:600;
+  font-size:15px;
 }
 
 /* BOTTOM NAV */
@@ -217,7 +121,7 @@ body{
   color:#113acf;
 }
 
-/* PAGE LAYOUT FIX */
+/* PAGE FIX */
 .page{
   height:100vh;
   display:flex;
@@ -227,14 +131,21 @@ body{
 .content{
   flex:1;
   overflow-y:auto;
-  padding-bottom:80px; /* space for bottom nav */
+  padding-bottom:120px;
 }
-.status{
-  font-size:11px;
-  padding:4px 12px;
+
+.search-box{
+  margin:16px;
+}
+
+.search-box input{
+  width:100%;
+  padding:12px 16px;
   border-radius:14px;
-  font-weight:600;
-  display:inline-block;
+  border:none;
+  outline:none;
+  font-size:14px;
+  box-shadow:0 6px 18px rgba(0,0,0,.1);
 }
 
 </style>
@@ -254,15 +165,36 @@ body{
     </div>
   </div>
 
-  <!-- SCROLLABLE CONTENT -->
-  <div class="content">
+  <!-- SEARCH BAR -->
+<div class="search-box">
+  <input
+    type="text"
+    id="searchInput"
+    placeholder="Search Category"
+    onkeyup="searchCategory()"
+  >
 
-    <!-- TRENDING -->
+  <p id="noResult" style="
+    display:none;
+    margin-top:8px;
+    font-size:13px;
+    color:#ff4d4d;
+    font-weight:600;
+    ">
+    Category not found
+  </p>
+</div>
+
+
+  <!-- CONTENT -->
+  <div class="content">
     <div class="section">
-      <h3>Trending Itineraries</h3>
+      <h3 id="itineraryTitle">Itinerary Category</h3>
+
 
       <div class="trending">
-        <a href="/Konkan">
+
+        <a href="/Beaches">
           <div class="place" style="background-image:url('{{ url_for('static', filename='images/Ganapatipule.jpg') }}');">
             <div><h4>Beaches</h4></div>
           </div>
@@ -270,11 +202,11 @@ body{
 
         <a href="/hill_forts">
           <div class="place" style="background-image:url('{{ url_for('static', filename='images/lohagad.jpeg') }}');">
-            <div><h4>Hills-Forts</h4></div>
+            <div><h4>Forts</h4></div>
           </div>
         </a>
 
-        <a href="ajanta_ellora">
+        <a href="historical">
           <div class="place" style="background-image:url('{{ url_for('static', filename='images/AE.jpeg') }}');">
             <div><h4>Historical Places</h4></div>
           </div>
@@ -282,14 +214,48 @@ body{
 
         <a href="Wildlife">
           <div class="place" style="background-image:url('{{ url_for('static', filename='images/Maharashtra Wildlife Package.jpeg') }}');">
-            <div><h4>Wildlife sanctuary</h4></div>
+            <div><h4>Wildlife Sanctuary</h4></div>
+          </div>
+        </a>
+
+        <a href="cityexp">
+          <div class="place" style="background-image:url('{{ url_for('static', filename='images/maharashtra map.jpeg') }}');">
+            <div><h4>City Experiences</h4></div>
+          </div>
+        </a>
+
+        <a href="spiritual_places">
+          <div class="place" style="background-image:url('{{ url_for('static', filename='images/Grishneshwar.jpg') }}');">
+            <div><h4>Religious & Spiritual</h4></div>
+          </div>
+        </a>
+
+        <a href="parks_gardens">
+          <div class="place" style="background-image:url('{{ url_for('static', filename='images/Grishneshwar.jpg') }}');">
+            <div><h4>Parks & Gardens</h4></div>
+          </div>
+        </a>
+
+        <a href="museums">
+          <div class="place" style="background-image:url('{{ url_for('static', filename='images/Grishneshwar.jpg') }}');">
+            <div><h4>Museums</h4></div>
+          </div>
+        </a>
+
+        <a href="shopping">
+          <div class="place" style="background-image:url('{{ url_for('static', filename='images/Grishneshwar.jpg') }}');">
+            <div><h4>Shopping Places</h4></div>
+          </div>
+        </a>
+
+        <a href="food">
+          <div class="place" style="background-image:url('{{ url_for('static', filename='images/Grishneshwar.jpg') }}');">
+            <div><h4>Food Places</h4></div>
           </div>
         </a>
 
       </div>
     </div>
-
-
   </div>
 
   <!-- BOTTOM NAV -->
@@ -308,7 +274,34 @@ body{
   </div>
 
 </div>
+<script>
+function searchCategory(){
+  let input = document.getElementById("searchInput").value.toLowerCase()
+  let cards = document.querySelectorAll(".place")
+  let found = false
+
+  cards.forEach(card=>{
+    let text = card.innerText.toLowerCase()
+
+    if(text.includes(input)){
+      card.parentElement.style.display = "block"
+      found = true
+    }else{
+      card.parentElement.style.display = "none"
+    }
+  })
+
+  // ❌ Location not found text
+  document.getElementById("noResult").style.display =
+    (found || input==="") ? "none" : "block"
+
+  // ✅ HIDE / SHOW heading
+  document.getElementById("itineraryTitle").style.display =
+    input === "" ? "block" : "none"
+}
+</script>
+
+
 
 </body>
-
 </html>

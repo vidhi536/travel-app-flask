@@ -1,0 +1,118 @@
+[
+  {
+    "city": "Mumbai",
+    "title": "Vada Pav – Ashok Vada Pav",
+    "desc": "Mumbai’s iconic street food, spicy potato fritter in pav.",
+    "img": "vada_pav.jpg"
+  },
+  {
+    "city": "Mumbai",
+    "title": "Bademiya Kebabs",
+    "desc": "Legendary late-night kebabs near Colaba.",
+    "img": "bademiya.jpg"
+  },
+  {
+    "city": "Mumbai",
+    "title": "Leopold Cafe",
+    "desc": "Historic cafe famous for global cuisine and ambience.",
+    "img": "leopold.jpg"
+  },
+
+  {
+    "city": "Pune",
+    "title": "Misal Pav – Bedekar",
+    "desc": "Spicy Kolhapuri-style misal loved by locals.",
+    "img": "misal.jpg"
+  },
+  {
+    "city": "Pune",
+    "title": "Vaishali",
+    "desc": "Popular South Indian breakfast destination.",
+    "img": "vaishali.jpg"
+  },
+  {
+    "city": "Pune",
+    "title": "Kayani Bakery",
+    "desc": "Famous for Shrewsbury biscuits and Irani chai.",
+    "img": "kayani.jpg"
+  },
+
+  {
+    "city": "Nagpur",
+    "title": "Saoji Bhojanalaya",
+    "desc": "Spicy Saoji meat curries unique to Nagpur.",
+    "img": "saoji.jpg"
+  },
+  {
+    "city": "Nagpur",
+    "title": "Haldiram’s",
+    "desc": "Famous sweets, snacks and chaat.",
+    "img": "haldiram.jpg"
+  },
+
+  {
+    "city": "Kolhapur",
+    "title": "Kolhapuri Tambda Rassa",
+    "desc": "Fiery red mutton curry served with bhakri.",
+    "img": "tambda_rassa.jpg"
+  },
+  {
+    "city": "Kolhapur",
+    "title": "Hotel Opal",
+    "desc": "Authentic Kolhapuri non-veg thali experience.",
+    "img": "opal.jpg"
+  },
+
+  {
+    "city": "Nashik",
+    "title": "Sula Vineyards",
+    "desc": "Wine tasting with scenic vineyard views.",
+    "img": "sula.jpg"
+  },
+  {
+    "city": "Nashik",
+    "title": "Misal Pav – Om Tea House",
+    "desc": "One of Nashik’s most loved misal joints.",
+    "img": "nashik_misal.jpg"
+  },
+
+  {
+    "city": "Aurangabad",
+    "title": "Naan Qalia",
+    "desc": "Royal Mughlai dish famous in the city.",
+    "img": "naan_qalia.jpg"
+  },
+  {
+    "city": "Aurangabad",
+    "title": "Yalla Yalla",
+    "desc": "Middle Eastern cuisine popular with tourists.",
+    "img": "yalla.jpg"
+  },
+
+  {
+    "city": "Ratnagiri",
+    "title": "Malvani Seafood",
+    "desc": "Fresh coastal fish curry with coconut flavors.",
+    "img": "malvani.jpg"
+  },
+  {
+    "city": "Ratnagiri",
+    "title": "Alphonso Mango Dishes",
+    "desc": "World famous Hapus mango delicacies.",
+    "img": "mango.jpg"
+  },
+
+  {
+    "city": "Solapur",
+    "title": "Solapuri Peanut Chutney",
+    "desc": "Spicy dry chutney served with bhakri.",
+    "img": "solapur_chutney.jpg"
+  },
+
+  {
+    "city": "Satara",
+    "title": "Kandi Pedhe",
+    "desc": "Traditional sweet made from milk and sugar.",
+    "img": "pedhe.jpg"
+  }
+]

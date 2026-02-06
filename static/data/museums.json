@@ -1,0 +1,44 @@
+[
+  {"city":"Mumbai","title":"Chhatrapati Shivaji Maharaj Vastu Sangrahalaya","desc":"India’s premier art & history museum","img":"csmvs.jpg"},
+  {"city":"Mumbai","title":"Dr Bhau Daji Lad Museum","desc":"Mumbai’s oldest museum","img":"bhau_daji_lad.jpg"},
+  {"city":"Mumbai","title":"Nehru Science Centre","desc":"Interactive science museum","img":"nehru_science.jpg"},
+  {"city":"Mumbai","title":"BEST Transport Museum","desc":"Mumbai transport history","img":"best_museum.jpg"},
+  {"city":"Mumbai","title":"INS Vikrant Museum","desc":"Naval heritage museum","img":"vikrant.jpg"},
+
+  
+  {"city":"Pune","title":"Raja Dinkar Kelkar Museum","desc":"Traditional Indian art collection","img":"kelkar.jpg"},
+  {"city":"Pune","title":"Mahatma Phule Museum","desc":"Social & industrial history","img":"phule.jpg"},
+  {"city":"Pune","title":"Joshi's Miniature Rail Museum","desc":"Mini rail models","img":"rail_museum.jpg"},
+  {"city":"Pune","title":"Blades of Glory Cricket Museum","desc":"Cricket memorabilia","img":"cricket_museum.jpg"},
+  {"city":"Pune","title":"National War Memorial Southern Command","desc":"Military history museum","img":"war_memorial.jpg"},
+
+  
+  {"city":"Aurangabad","title":"Ajanta Museum","desc":"Ajanta cave sculptures","img":"ajanta_museum.jpg"},
+  {"city":"Aurangabad","title":"Siddharth Garden Museum","desc":"Local archaeological exhibits","img":"siddharth.jpg"},
+  {"city":"Aurangabad","title":"Himroo Shawl Museum","desc":"Traditional weaving art","img":"himroo.jpg"},
+
+  
+  {"city":"Nagpur","title":"Central Museum","desc":"Archaeological & natural history","img":"nagpur_museum.jpg"},
+  {"city":"Nagpur","title":"Raman Science Centre","desc":"Hands-on science exhibits","img":"raman_science.jpg"},
+
+  
+  {"city":"Kolhapur","title":"New Palace Museum","desc":"Royal palace museum","img":"kolhapur_museum.jpg"},
+  {"city":"Kolhapur","title":"Rankala Museum","desc":"Local cultural artifacts","img":"rankala.jpg"},
+
+ 
+  {"city":"Nashik","title":"Coin Museum","desc":"Indian currency history","img":"coin_museum.jpg"},
+  {"city":"Nashik","title":"Gargoti Mineral Museum","desc":"World-class mineral collection","img":"gargoti.jpg"},
+
+ 
+  {"city":"Solapur","title":"Textile Museum","desc":"Solapur chaddar history","img":"textile_museum.jpg"},
+
+  
+  {"city":"Sangli","title":"Ganapati Temple Museum","desc":"Religious artifacts","img":"ganapati_museum.jpg"},
+
+  {"city":"Ahmednagar","title":"Cavalry Tank Museum","desc":"Largest tank collection in Asia","img":"tank_museum.jpg"},
+  {"city":"Ahmednagar","title":"Meher Baba Museum","desc":"Spiritual & historical museum","img":"meher_baba.jpg"},
+
+  {"city":"Ratnagiri","title":"Thibaw Palace Museum","desc":"Exile palace of Burmese king","img":"thibaw.jpg"},
+
+  {"city":"Chandrapur","title":"Forest Museum","desc":"Wildlife & forest heritage","img":"forest_museum.jpg"}
+]

@@ -1,0 +1,41 @@
+[
+  {"city":"Pune","title":"Sinhagad Fort","desc":"Historic hill fort & trekking spot","img":"sinhagad.jpg"},
+  {"city":"Pune","title":"Rajgad Fort","desc":"Capital of Shivaji Maharaj for years","img":"rajgad.jpg"},
+  {"city":"Pune","title":"Torna Fort","desc":"First fort captured by Shivaji Maharaj","img":"torna.jpg"},
+  {"city":"Pune","title":"Purandar Fort","desc":"Important Maratha stronghold","img":"purandar.jpg"},
+  {"city":"Pune","title":"Lohagad Fort","desc":"Easy trek & monsoon favorite","img":"lohagad.jpg"},
+  {"city":"Pune","title":"Visapur Fort","desc":"Twin fort of Lohagad","img":"visapur.jpg"},
+
+  {"city":"Raigad","title":"Raigad Fort","desc":"Capital fort of Maratha Empire","img":"raigad.jpg"},
+  {"city":"Raigad","title":"Murud Janjira","desc":"Sea fort never conquered","img":"janjira.jpg"},
+  {"city":"Raigad","title":"Korigad Fort","desc":"Popular Lonavala trek fort","img":"korigad.jpg"},
+
+  {"city":"Nashik","title":"Harihar Fort","desc":"Vertical rock-cut steps trek","img":"harihar.jpg"},
+  {"city":"Nashik","title":"Trimbak Fort","desc":"Near Trimbakeshwar temple","img":"trimbak_fort.jpg"},
+  {"city":"Nashik","title":"Salher Fort","desc":"One of highest forts in Maharashtra","img":"salher.jpg"},
+
+  {"city":"Satara","title":"Ajinkyatara Fort","desc":"Fort overlooking Satara city","img":"ajinkyatara.jpg"},
+  {"city":"Satara","title":"Sajjangad","desc":"Spiritual fort of Samarth Ramdas","img":"sajjangad.jpg"},
+  {"city":"Satara","title":"Vairatgad Fort","desc":"Ancient hill fort","img":"vairatgad.jpg"},
+
+  {"city":"Kolhapur","title":"Panhala Fort","desc":"Massive fort with long walls","img":"panhala.jpg"},
+  {"city":"Kolhapur","title":"Bhudargad Fort","desc":"Scenic historic fort","img":"bhudargad.jpg"},
+
+  {"city":"Aurangabad","title":"Daulatabad Fort","desc":"Devgiri — unconquered fort","img":"daulatabad.jpg"},
+  {"city":"Aurangabad","title":"Antur Fort","desc":"Hidden hill fort","img":"antur.jpg"},
+
+  {"city":"Ahmednagar","title":"Ahmednagar Fort","desc":"Historic ground fort","img":"ahmednagar_fort.jpg"},
+  {"city":"Ahmednagar","title":"Harishchandragad","desc":"Konkan Kada cliff view","img":"harishchandragad.jpg"},
+
+  {"city":"Thane","title":"Karnala Fort","desc":"Bird sanctuary fort trek","img":"karnala.jpg"},
+  {"city":"Thane","title":"Mahuli Fort","desc":"Highest peak in Thane district","img":"mahuli.jpg"},
+
+  {"city":"Ratnagiri","title":"Ratnadurg Fort","desc":"Sea fort with lighthouse","img":"ratnadurg.jpg"},
+  {"city":"Ratnagiri","title":"Suvarnadurg","desc":"Historic island fort","img":"suvarnadurg.jpg"},
+
+  {"city":"Sindhudurg","title":"Sindhudurg Fort","desc":"Sea fort built by Shivaji Maharaj","img":"sindhudurg.jpg"},
+  {"city":"Sindhudurg","title":"Vijaydurg Fort","desc":"Strong sea fort","img":"vijaydurg.jpg"},
+
+  {"city":"Mumbai","title":"Prabalgad Fort","desc":"Trek near Panvel","img":"prabalgad.jpg"},
+  {"city":"Mumbai","title":"Castella de Aguada","desc":"Bandra Fort viewpoint","img":"bandra_fort.jpg"}
+]

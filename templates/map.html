@@ -1,81 +1,109 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Map Page</title>
+  <title>Tourist Places Around Me</title>
 
-    <!-- Leaflet CSS (REQUIRED) -->
-    <link
-      rel="stylesheet"
-      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-    />
+  <!-- Leaflet CSS -->
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+  />
 
-    <!-- MAP HEIGHT (REQUIRED) -->
-    <style>
-        #map {
-            height: 100vh;
-            width: 100%;
-        }
-    </style>
+  <style>
+    #map {
+      height: 90vh;
+      width: 100%;
+    }
+    button {
+      padding: 10px 15px;
+      margin: 10px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+  </style>
 </head>
 <body>
-<h2>Map Page Loaded</h2>
-<link rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css">
 
-<div id="map" style="height: 600px; width: 100%;"></div>
+<h2>📍 Tourist Places Around You</h2>
+<a href="/itinerary"><button onclick="goToItinerary()">View Planned Itinerary</button></a>
 
-<!-- Load Leaflet JS AFTER map div -->
-<script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js"></script>
+<div id="map"></div>
 
+<!-- Leaflet JS -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
 <script>
-  var map = L.map('map').setView([18.9220, 72.8347], 15);
+  let map;
+  let placesData = [];
 
-  // Load map tiles
-  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '© OpenStreetMap contributors'
+  // Initialize map
+  map = L.map("map").setView([0, 0], 13);
+
+  L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+    attribution: "© OpenStreetMap contributors"
   }).addTo(map);
 
-  // Marker for live position
-  var userMarker = L.marker([18.9220, 72.8347]).addTo(map);
+  // Get current location
+  navigator.geolocation.getCurrentPosition(
+    position => {
+      const lat = position.coords.latitude;
+      const lon = position.coords.longitude;
 
-  // Polyline to track movement
- // var routePath = L.polyline([], { weight: 4 }).addTo(map);
+      map.setView([lat, lon], 14);
 
-  // GPS tracking
-  if ("geolocation" in navigator) {
-    navigator.geolocation.watchPosition(
-      function (position) {
-        var lat = position.coords.latitude;
-        var lng = position.coords.longitude;
+      // User marker
+      L.marker([lat, lon])
+        .addTo(map)
+        .bindPopup("📍 You are here")
+        .openPopup();
 
-        var newLatLng = [lat, lng];
+      fetchTouristPlaces(lat, lon);
+    },
+    error => {
+      alert("Location access denied");
+    }
+  );
 
-        // Move marker
-        userMarker.setLatLng(newLatLng)
-          .bindPopup("You are here")
-          .openPopup();
+  // Fetch tourist places from OpenTripMap
+  function fetchTouristPlaces(lat, lon) {
+    const apiKey = "5ae2e3f221c38a28845f05b6abb8c85a315b1b89d4c85f706211f4b0";
+    const radius = 5000; // 5 km
 
-        // Center map
-        map.setView(newLatLng, 16);
+    const url = `https://api.opentripmap.com/0.1/en/places/radius?radius=${radius}&lon=${lon}&lat=${lat}&kinds=tourist_attraction&limit=10&apikey=${apiKey}`;
 
-        // Add point to route
-        routePath.addLatLng(newLatLng);
-      },
-      function (error) {
-        alert("GPS error: " + error.message);
-      },
-      {
-        enableHighAccuracy: true,
-        maximumAge: 1000,
-        timeout: 5000
-      }
-    );
-  } else {
-    alert("Geolocation not supported");
+    fetch(url)
+  .then(res => {
+    if (!res.ok) {
+      throw new Error("API failed: " + res.status);
+    }
+    return res.json();
+  })
+  .then(data => {
+    if (!data.features || data.features.length === 0) {
+      console.log("No places returned");
+      return;
+    }
+
+    placesData = data.features;
+
+    placesData.forEach(place => {
+      const lat = place.geometry.coordinates[1];
+      const lon = place.geometry.coordinates[0];
+      const name = place.properties.name || "Tourist Place";
+
+      L.marker([lat, lon]).addTo(map).bindPopup(name);
+    });
+
+    localStorage.setItem("itineraryPlaces", JSON.stringify(placesData));
+    console.log("Saved places:", placesData.length);
+  })
+  .catch(err => console.error(err));
+  }
+
+  function goToItinerary() {
+    window.location.href = "itinerary.html";
   }
 </script>
-
 
 </body>
 </html>

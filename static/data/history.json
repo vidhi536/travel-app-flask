@@ -1,0 +1,28 @@
+[
+  {"city":"Mumbai","title":"Gateway of India","desc":"Iconic colonial monument","img":"gateway.jpg"},
+  {"city":"Mumbai","title":"CSM Terminus","desc":"UNESCO railway heritage building","img":"cst.jpg"},
+  {"city":"Mumbai","title":"Elephanta Caves","desc":"Ancient rock-cut cave temples","img":"elephanta.jpg"},
+  {"city":"Mumbai","title":"Mani Bhavan","desc":"Gandhi memorial museum","img":"manibhavan.jpg"},
+
+  {"city":"Pune","title":"Shaniwar Wada","desc":"Historic Peshwa palace complex","img":"shaniwarwada.jpg"},
+  {"city":"Pune","title":"Aga Khan Palace","desc":"Freedom movement landmark","img":"agakhan.jpg"},
+  {"city":"Pune","title":"Lal Mahal","desc":"Historic royal residence","img":"lalmahal.jpg"},
+  {"city":"Pune","title":"Raja Dinkar Kelkar Museum","desc":"Heritage artifacts museum","img":"kelkar.jpg"},
+
+  {"city":"Aurangabad","title":"Ajanta Caves","desc":"Ancient Buddhist cave art","img":"ajanta.jpg"},
+  {"city":"Aurangabad","title":"Ellora Caves","desc":"Rock-cut temple complex","img":"ellora.jpg"},
+  {"city":"Aurangabad","title":"Bibi Ka Maqbara","desc":"Mughal era monument","img":"bibi.jpg"},
+  {"city":"Aurangabad","title":"Panchakki","desc":"Historic water mill","img":"panchakki.jpg"},
+
+  {"city":"Kolhapur","title":"New Palace Museum","desc":"Royal palace & museum","img":"kolhapur_palace.jpg"},
+  {"city":"Kolhapur","title":"Town Hall Museum","desc":"Historic city museum","img":"townhall.jpg"},
+
+  {"city":"Nashik","title":"Pandavleni Caves","desc":"Ancient Jain caves","img":"pandavleni.jpg"},
+  {"city":"Nashik","title":"Coin Museum","desc":"Indian currency history","img":"coinmuseum.jpg"},
+
+  {"city":"Ahmednagar","title":"Cavalry Tank Museum","desc":"Military history museum","img":"tankmuseum.jpg"},
+
+  {"city":"Raigad","title":"Kolaba Lighthouse Area","desc":"Historic coastal structure","img":"kolaba_light.jpg"},
+
+  {"city":"Sindhudurg","title":"Rock Garden Malvan","desc":"Historic coastal sculpture site","img":"malvan_rock.jpg"}
+]

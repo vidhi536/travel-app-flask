@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>PlanNGo – Wildlife Sanctuaries</title>
+<title>PlanNGo – Food Places</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
@@ -97,8 +97,8 @@ font-size:12px;text-align:center;
 <body>
 
 <div class="header">
-<h2>Wildlife Sanctuaries</h2>
-<p style="font-size:13px;opacity:.9;">Nature & Forest Escapes</p>
+<h2>Famous Food Places</h2>
+<p style="font-size:13px;opacity:.9;">Taste of Maharashtra</p>
 </div>
 
 <div id="tabs" class="tabs"></div>
@@ -107,7 +107,7 @@ font-size:12px;text-align:center;
 <script>
 let allData = []
 
-fetch("/static/data/wildlife.json")
+fetch("/static/data/food.json")
 .then(r=>r.json())
 .then(data=>{
   allData = data
@@ -146,7 +146,11 @@ function buildSections(){
             <div class="card-content">
               <h4>${item.title}</h4>
               <p>${item.desc}</p>
-              <a href="/check_login_trip" class="plan-btn">Plan Trip</a>
+
+              <a href="/check_login_trip" class="plan-btn">
+                Plan Trip
+              </a>
+
             </div>
           </div>
         `).join("")}

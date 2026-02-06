@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Your Travel Itinerary</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    .place {
+      border: 1px solid #ddd;
+      padding: 15px;
+      margin-bottom: 10px;
+      border-radius: 6px;
+    }
+    h2 {
+      color: #2c3e50;
+    }
+  </style>
+</head>
+<body>
+
+<h1>🗺️ Your Planned Itinerary</h1>
+
+<div id="itinerary"></div>
+
+<script>
+  const itineraryDiv = document.getElementById("itinerary");
+  const places = JSON.parse(localStorage.getItem("itineraryPlaces"));
+
+  if (!places || places.length === 0) {
+    itineraryDiv.innerHTML = "<p>No places found.</p>";
+  } else {
+    places.forEach((place, index) => {
+      const name = place.properties.name || "Tourist Place";
+      const kind = place.properties.kinds
+        ? place.properties.kinds.replaceAll(",", ", ")
+        : "Sightseeing";
+
+      itineraryDiv.innerHTML += `
+        <div class="place">
+          <h2>Stop ${index + 1}: ${name}</h2>
+          <p><b>Activity:</b> ${kind}</p>
+          <p><b>Suggested Time:</b> ${index + 1 === 1 ? "Morning" : index + 1 <= 3 ? "Late Morning" : "Afternoon"}</p>
+        </div>
+      `;
+    });
+  }
+</script>
+
+</body>
+</html>

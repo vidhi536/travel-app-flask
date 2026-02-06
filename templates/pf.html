@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Edit Profile – PlanNGo</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+body{
+    margin:0;
+    font-family:'Inter',sans-serif;
+    background:#f6f7f9;
+}
+
+/* ===== HEADER (same gradient) ===== */
+.header{
+    background:linear-gradient(135deg,#ff5a5f,#ff9068);
+    color:#fff;
+    padding:20px;
+    text-align:center;
+    border-bottom-left-radius:24px;
+    border-bottom-right-radius:24px;
+}
+
+.header h2{
+    margin:0;
+    font-size:18px;
+}
+
+/* ===== PROFILE IMAGE ===== */
+.profile-pic{
+    width:90px;
+    height:90px;
+    background:#e9e9e9;
+    border-radius:50%;
+    margin:-45px auto 18px;
+    border:3px solid #fff;
+}
+
+/* ===== FORM CARD ===== */
+.form-container{
+    max-width:380px;
+    margin:0 auto;
+    background:#fff;
+    border-radius:20px;
+    padding:22px;
+    box-shadow:0 12px 30px rgba(0,0,0,.15);
+}
+
+/* ===== INPUTS ===== */
+.form-group{
+    margin-bottom:16px;
+}
+
+.form-group label{
+    display:block;
+    font-size:12px;
+    color:#777;
+    margin-bottom:4px;
+}
+
+.form-group input,
+.form-group select{
+    width:100%;
+    padding:10px 12px;
+    border:none;
+    border-bottom:1px solid #ddd;
+    font-size:14px;
+    outline:none;
+    background:transparent;
+}
+
+.form-group input:focus,
+.form-group select:focus{
+    border-bottom-color:#ff5a5f;
+}
+
+/* ===== BUTTON ===== */
+.btn{
+    width:100%;
+    padding:12px;
+    margin-top:18px;
+    background:#ff5a5f;
+    color:#fff;
+    border:none;
+    border-radius:18px;
+    font-size:14px;
+    cursor:pointer;
+}
+
+.btn:hover{
+    background:#ff3b3f;
+}
+
+/* ===== FOOTER LINKS ===== */
+.footer-links{
+    text-align:center;
+    margin-top:20px;
+    font-size:13px;
+}
+
+.footer-links a{
+    display:block;
+    color:#ff5a5f;
+    text-decoration:none;
+    margin:6px 0;
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">
+    <h2>Edit Profile</h2>
+</div>
+
+
+
+<div class="form-container">
+
+    <div class="form-group">
+        <label>Gender</label>
+        <select>
+            <option>Male</option>
+            <option>Female</option>
+            <option>Other</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label>First Name</label>
+        <input type="text" placeholder="First Name">
+    </div>
+
+    <div class="form-group">
+        <label>Last Name</label>
+        <input type="text" placeholder="Last Name">
+    </div>
+
+    <div class="form-group">
+        <label>Email</label>
+        <input type="email" placeholder="email@example.com">
+    </div>
+
+    <div class="form-group">
+        <label>Mobile Number</label>
+        <input type="text" placeholder="+91-XXXXXXXXXX">
+    </div>
+
+   
+
+    <button class="btn">Save Changes</button>
+
+    <div class="footer-links">
+        
+        <a href="#">Change Password</a>
+        <a href="#">Log Out</a>
+    </div>
+
+</div>
+
+</body>
+</html>
