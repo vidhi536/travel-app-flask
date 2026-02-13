@@ -1,289 +1,151 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>PlanNGo – Winter Destinations</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PlanNGo – Winter Wonderland</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
-
-<style>
-*{box-sizing:border-box;}
-
-body{
-  margin:0;
-  font-family:'Inter',sans-serif;
-  background:#f6f7f9;
-  color:#222;
-}
-
-/* HEADER */
-.header{
-  background:#113acf;
-  padding:16px;
-  border-bottom-left-radius:20px;
-  border-bottom-right-radius:20px;
-  color:#fff;
-}
-
-.header-top{
-  display:flex;
-  align-items:center;
-}
-
-/* PAGE */
-.page{
-  height:100vh;
-  display:flex;
-  flex-direction:column;
-}
-
-.content{
-  flex:1;
-  overflow-y:auto;
-  padding:16px;
-  padding-bottom:140px;
-}
-
-/* TITLE */
-.section-title{
-  font-size:18px;
-  font-weight:600;
-  margin-bottom:14px;
-}
-
-/* GRID */
-.destination-grid{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:14px;
-}
-
-/* CARD */
-.trend-card{
-  height:200px;
-  border-radius:16px;
-  overflow:hidden;
-  position:relative;
-  background:#000;
-}
-
-.trend-card img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-}
-
-/* OVERLAY */
-.trend-card::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:linear-gradient(to top, rgba(0,0,0,.75), rgba(0,0,0,.25));
-}
-
-/* CONTENT */
-.card-content{
-  position:absolute;
-  inset:0;
-  padding:12px;
-  display:flex;
-  flex-direction:column;
-  justify-content:flex-end;
-  color:#fff;
-  z-index:2;
-}
-
-.card-content h4{
-  margin:0;
-  font-size:14px;
-  font-weight:600;
-}
-
-.distance{
-  font-size:11px;
-  margin:4px 0;
-  display:flex;
-  alignates-items:center;
-  gap:4px;
-  opacity:.9;
-}
-
-.distance i{
-  font-size:10px;
-}
-
-.card-content p{
-  font-size:11px;
-  line-height:1.35;
-  margin:6px 0 10px;
-  opacity:.95;
-}
-
-/* BUTTON */
-.plan-btn{
-  align-self:flex-start;
-  font-size:11px;
-  padding:6px 12px;
-  border-radius:14px;
-  background:#ffffff;
-  color:#113acf;
-  text-decoration:none;
-  font-weight:600;
-}
-
-/* BOTTOM NAV */
-.bottom-nav{
-  position:fixed;
-  bottom:0;
-  left:0;
-  right:0;
-  background:#fff;
-  display:flex;
-  justify-content:space-around;
-  padding:10px 0;
-  box-shadow:0 -6px 20px rgba(0,0,0,.12);
-}
-
-.bottom-nav a{
-  text-decoration:none;
-  color:#777;
-  font-size:12px;
-  text-align:center;
-}
-
-.bottom-nav i{
-  display:block;
-  font-size:18px;
-  margin-bottom:4px;
-}
-
-.bottom-nav a.active{
-  color:#113acf;
-}
-</style>
+    <style>
+        body { font-family: 'Poppins', sans-serif; background-color: #f5fcff; } /* Icy Blue bg */
+        .glass { background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255, 255, 255, 0.3); }
+        .animate-on-scroll { opacity: 0; transform: translateY(30px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+        .animate-on-scroll.visible { opacity: 1; transform: translateY(0); }
+        .delay-100 { transition-delay: 0.1s; }
+        .delay-200 { transition-delay: 0.2s; }
+        @keyframes float { 
+            0% { transform: translate(0px, 0px) scale(1); } 
+            33% { transform: translate(30px, -50px) scale(1.1); } 
+            66% { transform: translate(-20px, 20px) scale(0.9); } 
+            100% { transform: translate(0px, 0px) scale(1); } 
+        }
+        .blob { animation: float 10s infinite ease-in-out; }
+    </style>
 </head>
+<body class="text-slate-800 antialiased overflow-x-hidden">
 
-<body>
-
-<div class="page">
-
-  <!-- HEADER -->
-  <div class="header">
-    <div class="header-top">
-      <h1>Winter Destinations</h1>
-    </div>
-  </div>
-
-  <!-- CONTENT -->
-  <div class="content">
-
-    <div class="section-title">Best Places To Visit In Winter</div>
-
-    <div class="destination-grid">
-
-      <!-- Mahabaleshwar -->
-      <div class="trend-card">
-        <img src="{{ url_for('static', filename='images/mahableshwar.jpeg') }}">
-        <div class="card-content">
-          <h4>Mahabaleshwar</h4>
-          <div class="distance"><i class="fa fa-location-dot"></i> 260 km from Mumbai</div>
-          <p>Cool weather, foggy mornings and winter strawberries.</p>
-          <a href="/check_login_trip" class="plan-btn">Plan Trip</a>
+    <nav class="fixed w-full z-50 glass transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <a href="/" class="flex-shrink-0 flex items-center gap-2 cursor-pointer text-decoration-none">
+                    <div class="w-10 h-10 bg-cyan-600 rounded-xl flex items-center justify-center shadow-lg shadow-cyan-500/30">
+                        <i class="fa-solid fa-paper-plane text-white text-lg"></i>
+                    </div>
+                    <span class="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-cyan-600 to-blue-600">PlanNGo</span>
+                </a>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="/" class="text-gray-500 hover:text-cyan-600 font-medium transition-colors">Home</a>
+                    <a href="/trip" class="text-gray-500 hover:text-cyan-600 font-medium transition-colors">Trip</a>
+                    <a href="#" class="text-cyan-600 font-bold border-b-2 border-cyan-600">Explore</a>
+                    <a href="/profile" class="text-gray-500 hover:text-cyan-600 font-medium transition-colors">Profile</a>
+                </div>
+                <div class="hidden md:flex items-center space-x-4">
+                    <button class="text-gray-600 font-semibold hover:text-cyan-600 transition-colors px-4">Log In</button>
+                    <button class="bg-cyan-600 hover:bg-cyan-700 text-white px-6 py-2.5 rounded-full font-medium shadow-lg shadow-cyan-200 transition-all transform hover:-translate-y-0.5">Sign Up</button>
+                </div>
+                <div class="md:hidden flex items-center">
+                    <button class="text-gray-600 hover:text-cyan-600 focus:outline-none"><i class="fa-solid fa-bars text-2xl"></i></button>
+                </div>
+            </div>
         </div>
-      </div>
+    </nav>
 
-      <!-- Panchgani -->
-      <div class="trend-card">
-        <img src="{{ url_for('static', filename='images/panchgani.jpeg') }}">
-        <div class="card-content">
-          <h4>Panchgani</h4>
-          <div class="distance"><i class="fa fa-location-dot"></i> 245 km from Mumbai</div>
-          <p>Pleasant winter climate and scenic table land views.</p>
-          <a href="/check_login_trip" class="plan-btn">Plan Trip</a>
+    <div class="relative pt-32 pb-12 overflow-hidden">
+        <div class="absolute top-0 right-0 -mr-20 -mt-20 w-[600px] h-[600px] bg-cyan-200 rounded-full blur-3xl opacity-40 z-[-1] blob"></div>
+        <div class="absolute bottom-0 left-0 -ml-20 -mb-20 w-[500px] h-[500px] bg-indigo-200 rounded-full blur-3xl opacity-40 z-[-1] blob" style="animation-delay: -5s;"></div>
+
+        <div class="max-w-7xl mx-auto px-4 text-center animate-on-scroll">
+            <span class="text-cyan-600 font-bold tracking-wider uppercase text-sm bg-cyan-100 px-4 py-1 rounded-full border border-cyan-200">
+                <i class="fa-regular fa-snowflake mr-2"></i> Winter Special
+            </span>
+            <h1 class="text-4xl md:text-5xl font-extrabold text-slate-900 mt-6 mb-4">Winter Wonderland</h1>
+            <p class="text-slate-500 text-lg max-w-2xl mx-auto">Embrace the chill with snow-capped peaks and cozy bonfires.</p>
         </div>
-      </div>
-
-      <!-- Ajanta -->
-      <div class="trend-card">
-        <img src="{{ url_for('static', filename='images/AE.jpeg') }}">
-        <div class="card-content">
-          <h4>Ajanta Caves</h4>
-          <div class="distance"><i class="fa fa-location-dot"></i> 330 km from Pune</div>
-          <p>Perfect winter weather to explore ancient caves.</p>
-          <a href="/check_login_trip" class="plan-btn">Plan Trip</a>
-        </div>
-      </div>
-
-      <!-- Ellora -->
-      <div class="trend-card">
-        <img src="{{ url_for('static', filename='images/Ellora Caves.jpg') }}">
-        <div class="card-content">
-          <h4>Ellora Caves</h4>
-          <div class="distance"><i class="fa fa-location-dot"></i> 300 km from Pune</div>
-          <p>Rock-cut architecture best visited in winter.</p>
-          <a href="/check_login_trip" class="plan-btn">Plan Trip</a>
-        </div>
-      </div>
-
-      <!-- Ganpatipule -->
-      <div class="trend-card">
-        <img src="{{ url_for('static', filename='images/Ganapatipule.jpg') }}">
-        <div class="card-content">
-          <h4>Ganpatipule</h4>
-          <div class="distance"><i class="fa fa-location-dot"></i> 375 km from Mumbai</div>
-          <p>Cool coastal breeze and clean winter beaches.</p>
-          <a href="/check_login_trip" class="plan-btn">Plan Trip</a>
-        </div>
-      </div>
-
-      <!-- Tarkarli -->
-      <div class="trend-card">
-        <img src="{{ url_for('static', filename='images/Tarkarli.jpg') }}">
-        <div class="card-content">
-          <h4>Tarkarli</h4>
-          <div class="distance"><i class="fa fa-location-dot"></i> 470 km from Mumbai</div>
-          <p>Best season for scuba diving and clear waters.</p>
-          <a href="/check_login_trip" class="plan-btn">Plan Trip</a>
-        </div>
-      </div>
-
-      <!-- Bhandardara -->
-      <div class="trend-card">
-        <img src="{{ url_for('static', filename='images/bhandardara.jpeg') }}">
-        <div class="card-content">
-          <h4>Bhandardara</h4>
-          <div class="distance"><i class="fa fa-location-dot"></i> 165 km from Mumbai</div>
-          <p>Chilly nights and serene lakeside views.</p>
-          <a href="/check_login_trip" class="plan-btn">Plan Trip</a>
-        </div>
-      </div>
-
-      <!-- Chikhaldara -->
-      <div class="trend-card">
-        <img src="{{ url_for('static', filename='images/Chikhaldara.jpeg') }}">
-        <div class="card-content">
-          <h4>Chikhaldara</h4>
-          <div class="distance"><i class="fa fa-location-dot"></i> 690 km from Mumbai</div>
-          <p>Coolest hill station of Vidarbha in winter.</p>
-         <a href="/check_login_trip" class="plan-btn">Plan Trip</a>
-        </div>
-      </div>
-
     </div>
 
-  </div>
+    <section class="pb-24 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
 
-  <!-- BOTTOM NAV -->
-  <div class="bottom-nav">
-    <a href="/"><i class="fa fa-home"></i>Home</a>
-    <a href="/trip"><i class="fa fa-map"></i>Trip</a>
-    <a href="/explore" class="active"><i class="fa fa-compass"></i>Explore</a>
-    <a href="/profile"><i class="fa fa-user"></i>Profile</a>
-  </div>
+                <div class="bg-white rounded-3xl p-3 shadow-sm hover:shadow-xl transition-all duration-300 border border-cyan-50 animate-on-scroll delay-100 group">
+                    <div class="relative h-56 rounded-2xl overflow-hidden mb-4">
+                        <img src="{{ url_for('static', filename='images/manali.jpg') }}" alt="Manali" class="w-full h-full object-cover transition-transform group-hover:scale-110 duration-500">
+                        <div class="absolute top-3 right-3 bg-white/90 backdrop-blur-md px-3 py-1 rounded-lg flex items-center gap-1 text-xs font-bold text-slate-800 shadow-sm">
+                             <i class="fa-solid fa-plane text-cyan-500"></i> Flight
+                        </div>
+                    </div>
+                    <div class="px-2 pb-2">
+                        <h3 class="text-xl font-bold text-slate-900 mb-2">Manali</h3>
+                        <p class="text-sm text-slate-500 mb-4 line-clamp-2">Snow-covered mountains, skiing, and cozy cafes.</p>
+                        <a href="/check_login_trip" class="block w-full py-3 rounded-xl bg-slate-900 text-white text-center font-bold hover:bg-slate-800 transition-all shadow-lg hover:-translate-y-1">Plan Trip</a>
+                    </div>
+                </div>
 
-</div>
+                <div class="bg-white rounded-3xl p-3 shadow-sm hover:shadow-xl transition-all duration-300 border border-cyan-50 animate-on-scroll delay-200 group">
+                    <div class="relative h-56 rounded-2xl overflow-hidden mb-4">
+                        <img src="{{ url_for('static', filename='images/auli.jpg') }}" alt="Auli" class="w-full h-full object-cover transition-transform group-hover:scale-110 duration-500">
+                        <div class="absolute top-3 right-3 bg-white/90 backdrop-blur-md px-3 py-1 rounded-lg flex items-center gap-1 text-xs font-bold text-slate-800 shadow-sm">
+                             <i class="fa-solid fa-plane text-cyan-500"></i> Flight
+                        </div>
+                    </div>
+                    <div class="px-2 pb-2">
+                        <h3 class="text-xl font-bold text-slate-900 mb-2">Auli</h3>
+                        <p class="text-sm text-slate-500 mb-4 line-clamp-2">India's premier skiing destination with cable cars.</p>
+                        <a href="/check_login_trip" class="block w-full py-3 rounded-xl bg-slate-900 text-white text-center font-bold hover:bg-slate-800 transition-all shadow-lg hover:-translate-y-1">Plan Trip</a>
+                    </div>
+                </div>
 
+                <div class="bg-white rounded-3xl p-3 shadow-sm hover:shadow-xl transition-all duration-300 border border-cyan-50 animate-on-scroll delay-100 group">
+                    <div class="relative h-56 rounded-2xl overflow-hidden mb-4">
+                        <img src="{{ url_for('static', filename='images/gulmarg.jpg') }}" alt="Gulmarg" class="w-full h-full object-cover transition-transform group-hover:scale-110 duration-500">
+                        <div class="absolute top-3 right-3 bg-white/90 backdrop-blur-md px-3 py-1 rounded-lg flex items-center gap-1 text-xs font-bold text-slate-800 shadow-sm">
+                             <i class="fa-solid fa-plane text-cyan-500"></i> Flight
+                        </div>
+                    </div>
+                    <div class="px-2 pb-2">
+                        <h3 class="text-xl font-bold text-slate-900 mb-2">Gulmarg</h3>
+                        <p class="text-sm text-slate-500 mb-4 line-clamp-2">Paradise on earth with the world's highest gondola.</p>
+                        <a href="/check_login_trip" class="block w-full py-3 rounded-xl bg-slate-900 text-white text-center font-bold hover:bg-slate-800 transition-all shadow-lg hover:-translate-y-1">Plan Trip</a>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-3xl p-3 shadow-sm hover:shadow-xl transition-all duration-300 border border-cyan-50 animate-on-scroll delay-200 group">
+                    <div class="relative h-56 rounded-2xl overflow-hidden mb-4">
+                        <img src="{{ url_for('static', filename='images/kutch.jpg') }}" alt="Kutch" class="w-full h-full object-cover transition-transform group-hover:scale-110 duration-500">
+                        <div class="absolute top-3 right-3 bg-white/90 backdrop-blur-md px-3 py-1 rounded-lg flex items-center gap-1 text-xs font-bold text-slate-800 shadow-sm">
+                             <i class="fa-solid fa-train text-cyan-500"></i> Train
+                        </div>
+                    </div>
+                    <div class="px-2 pb-2">
+                        <h3 class="text-xl font-bold text-slate-900 mb-2">Rann of Kutch</h3>
+                        <p class="text-sm text-slate-500 mb-4 line-clamp-2">Experience the white desert festival under the moon.</p>
+                        <a href="/check_login_trip" class="block w-full py-3 rounded-xl bg-slate-900 text-white text-center font-bold hover:bg-slate-800 transition-all shadow-lg hover:-translate-y-1">Plan Trip</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-white border-t border-slate-100 py-12">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <div class="flex items-center justify-center gap-2 mb-4">
+               <div class="w-8 h-8 bg-cyan-600 rounded-lg flex items-center justify-center">
+                    <i class="fa-solid fa-paper-plane text-white text-sm"></i>
+               </div>
+               <span class="text-xl font-bold text-slate-900">PlanNGo</span>
+            </div>
+            <p class="text-slate-500 text-sm">© 2024 PlanNGo. Design your perfect journey.</p>
+        </div>
+    </footer>
+
+    <script>
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.animate-on-scroll').forEach((el) => observer.observe(el));
+    </script>
 </body>
 </html>

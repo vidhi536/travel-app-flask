@@ -1,109 +1,254 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Tourist Places Around Me</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PlanNGo – Route Planner</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-  <!-- Leaflet CSS -->
-  <link
-    rel="stylesheet"
-    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-  />
+    <style>
+        body { font-family: 'Poppins', sans-serif; margin: 0; padding: 0; }
+        #map { height: 100vh; width: 100%; }
+        
+        /* Floating Info Card */
+        .info-card {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 15px 25px;
+            border-radius: 50px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            width: 90%;
+            max-width: 500px;
+        }
 
-  <style>
-    #map {
-      height: 90vh;
-      width: 100%;
-    }
-    button {
-      padding: 10px 15px;
-      margin: 10px;
-      font-size: 16px;
-      cursor: pointer;
-    }
-  </style>
+        /* Bottom Action Bar */
+        .action-bar {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #4f46e5, #7c3aed);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 5px 20px rgba(79, 70, 229, 0.4);
+            transition: transform 0.2s;
+        }
+
+        .btn-primary:hover { transform: translateY(-2px); }
+    </style>
 </head>
+
 <body>
 
-<h2>📍 Tourist Places Around You</h2>
-<a href="/itinerary"><button onclick="goToItinerary()">View Planned Itinerary</button></a>
+    <div class="info-card">
+        <div class="w-10 h-10 bg-indigo-100 rounded-full flex items-center justify-center text-indigo-600">
+            <i class="fa-solid fa-route"></i>
+        </div>
+        <div>
+            <h3 class="font-bold text-slate-800 text-sm m-0">Optimized Route</h3>
+            <p id="status-text" class="text-xs text-slate-500 m-0">Locating you...</p>
+        </div>
+    </div>
 
-<div id="map"></div>
+    <div id="map"></div>
 
-<!-- Leaflet JS -->
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <div class="action-bar">
+        <button class="btn-primary" onclick="window.location.href='/trip'">
+            <i class="fa-solid fa-list-check mr-2"></i> View Full Itinerary
+        </button>
+    </div>
 
-<script>
-  let map;
-  let placesData = [];
+    <script>
+let map;
+let directionsService;
+let directionsRenderer;
+let placesService;
 
-  // Initialize map
-  map = L.map("map").setView([0, 0], 13);
+const params = new URLSearchParams(window.location.search);
+const destinationQuery = params.get("destination") || "Gateway of India, Mumbai";
 
-  L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-    attribution: "© OpenStreetMap contributors"
-  }).addTo(map);
+function initMap() {
 
-  // Get current location
-  navigator.geolocation.getCurrentPosition(
-    position => {
-      const lat = position.coords.latitude;
-      const lon = position.coords.longitude;
-
-      map.setView([lat, lon], 14);
-
-      // User marker
-      L.marker([lat, lon])
-        .addTo(map)
-        .bindPopup("📍 You are here")
-        .openPopup();
-
-      fetchTouristPlaces(lat, lon);
-    },
-    error => {
-      alert("Location access denied");
-    }
-  );
-
-  // Fetch tourist places from OpenTripMap
-  function fetchTouristPlaces(lat, lon) {
-    const apiKey = "5ae2e3f221c38a28845f05b6abb8c85a315b1b89d4c85f706211f4b0";
-    const radius = 5000; // 5 km
-
-    const url = `https://api.opentripmap.com/0.1/en/places/radius?radius=${radius}&lon=${lon}&lat=${lat}&kinds=tourist_attraction&limit=10&apikey=${apiKey}`;
-
-    fetch(url)
-  .then(res => {
-    if (!res.ok) {
-      throw new Error("API failed: " + res.status);
-    }
-    return res.json();
-  })
-  .then(data => {
-    if (!data.features || data.features.length === 0) {
-      console.log("No places returned");
-      return;
-    }
-
-    placesData = data.features;
-
-    placesData.forEach(place => {
-      const lat = place.geometry.coordinates[1];
-      const lon = place.geometry.coordinates[0];
-      const name = place.properties.name || "Tourist Place";
-
-      L.marker([lat, lon]).addTo(map).bindPopup(name);
+    map = new google.maps.Map(document.getElementById("map"), {
+        zoom: 13,
+        center: { lat: 18.5204, lng: 73.8567 },
+        mapTypeControl: false,
+        fullscreenControl: false
     });
 
-    localStorage.setItem("itineraryPlaces", JSON.stringify(placesData));
-    console.log("Saved places:", placesData.length);
-  })
-  .catch(err => console.error(err));
-  }
+    directionsService = new google.maps.DirectionsService();
+    directionsRenderer = new google.maps.DirectionsRenderer({
+        map: map,
+        suppressMarkers: true, // IMPORTANT: we will add custom markers
+        polylineOptions: {
+            strokeColor: "#4f46e5",
+            strokeWeight: 6,
+            strokeOpacity: 0.8
+        }
+    });
 
-  function goToItinerary() {
-    window.location.href = "itinerary.html";
-  }
+    placesService = new google.maps.places.PlacesService(map);
+
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition((position) => {
+
+            const userLocation = {
+                lat: position.coords.latitude,
+                lng: position.coords.longitude
+            };
+
+            map.setCenter(userLocation);
+
+            // USER MARKER
+            new google.maps.Marker({
+                position: userLocation,
+                map: map,
+                title: "You are here",
+                icon: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png"
+            });
+
+            document.getElementById("status-text").innerText =
+                "Found you! Calculating route...";
+
+            findDestinationAndRoute(userLocation, destinationQuery);
+
+        }, () => handleLocationError(true));
+    } else {
+        handleLocationError(false);
+    }
+}
+
+// Convert Destination Name to Coordinates
+function findDestinationAndRoute(startLoc, destName) {
+
+    const geocoder = new google.maps.Geocoder();
+
+    geocoder.geocode({ address: destName }, (results, status) => {
+
+        if (status === "OK") {
+
+            const destLocation = results[0].geometry.location;
+
+            // DESTINATION MARKER
+            new google.maps.Marker({
+                position: destLocation,
+                map: map,
+                title: "Destination",
+                icon: "http://maps.google.com/mapfiles/ms/icons/red-dot.png"
+            });
+
+            findNearbyAttractions(startLoc, destLocation);
+
+        } else {
+            alert("Destination not found.");
+        }
+    });
+}
+
+// Find Tourist Attractions Near Destination
+function findNearbyAttractions(startLoc, destLocation) {
+
+    const request = {
+        location: destLocation,
+        radius: 5000,
+        type: ['tourist_attraction']
+    };
+
+    placesService.nearbySearch(request, (results, status) => {
+
+        let waypoints = [];
+
+        if (status === google.maps.places.PlacesServiceStatus.OK && results.length > 0) {
+
+            // Sort by rating (highest first)
+            results.sort((a, b) => (b.rating || 0) - (a.rating || 0));
+
+            const topPlaces = results.slice(0, 3);
+
+            topPlaces.forEach((place) => {
+
+                waypoints.push({
+                    location: place.geometry.location,
+                    stopover: true
+                });
+
+                new google.maps.Marker({
+                    position: place.geometry.location,
+                    map: map,
+                    title: place.name,
+                    icon: "http://maps.google.com/mapfiles/ms/icons/green-dot.png"
+                });
+            });
+
+            document.getElementById("status-text").innerText =
+                `Route via ${topPlaces.length} famous spots`;
+        }
+
+        calculateRoute(startLoc, destLocation, waypoints);
+    });
+}
+
+// Draw Route
+function calculateRoute(start, end, waypoints) {
+
+    const request = {
+        origin: start,
+        destination: end,
+        waypoints: waypoints,
+        optimizeWaypoints: true,
+        travelMode: google.maps.TravelMode.DRIVING
+    };
+
+    directionsService.route(request, function(result, status) {
+
+        if (status === "OK") {
+
+            directionsRenderer.setDirections(result);
+
+        } else {
+
+            console.error("Directions failed with status:", status);
+            alert("Directions failed: " + status);
+        }
+    });
+}
+
+
+
+function handleLocationError(browserHasGeolocation) {
+    alert(browserHasGeolocation ?
+        "Geolocation failed." :
+        "Browser doesn't support geolocation.");
+}
 </script>
+
+
+    <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCkIPEHU60BvEC3d598gpel5L9wT0lfai0&libraries=places&callback=initMap">
+    </script>
 
 </body>
 </html>

@@ -24,32 +24,7 @@ with get_db() as db:
             password TEXT
         )
     """)
-# ---------------- helper function ----------------
-def call_huggingface(prompt):
-    url = f"https://api-inference.huggingface.co/models/{HUGGINGFACE_MODEL}"
-    headers = {"Authorization": f"Bearer {HUGGINGFACE_API_KEY}"}
-    data = {"inputs": prompt}
-    response = requests.post(url, headers=headers, json=data)
-    try:
-        res_json = response.json()
-        if isinstance(res_json, list) and "generated_text" in res_json[0]:
-            return res_json[0]["generated_text"]
-        elif "error" in res_json:
-            return f"Error from AI: {res_json['error']}"
-        else:
-            return "Could not generate itinerary"
-    except Exception as e:
-        return f"Exception: {e}"
 
-# ---------------- DISTANCE FUNCTION ----------------
-def calculate_distance(lat1, lon1, lat2, lon2):
-    R = 6371
-    dlat = math.radians(lat2-lat1)
-    dlon = math.radians(lon2-lon1)
-    a = math.sin(dlat/2)**2 + math.cos(math.radians(lat1)) * \
-        math.cos(math.radians(lat2)) * math.sin(dlon/2)**2
-    c = 2 * math.atan2(math.sqrt(1-a))
-    return round(R * c, 2)
 
 # ---------------- HOME ----------------
 @app.route('/')
@@ -65,13 +40,22 @@ def home():
     return render_template('welcome.html', user=user)
 
 # ---------------- MAP ----------------
-@app.route('/map')
-def map_view():
-    places = [
-        {"name": "Gateway of India", "lat": 18.9220, "lng": 72.8347},
-        {"name": "Marine Drive", "lat": 18.9430, "lng": 72.8238},
-    ]
-    return render_template("map.html", places=places)
+@app.route("/map")
+def map_page():
+    print(request.args)
+    return render_template("map.html")
+    
+
+# ---------------- TRIP ----------------
+@app.route("/trip")
+def trip():
+    return render_template("trip.html")
+
+# ---------------- ITINERARY ----------------
+
+@app.route("/itinerary")
+def itinerary():
+    return render_template("itinerary_result.html")
 
 # ---------------- LOGIN ----------------
 @app.route('/login', methods=['GET', 'POST'])
@@ -186,10 +170,6 @@ def logout():
 def explore():
     return render_template('explore.html')
 
-@app.route('/trip')
-def trip():
-    return render_template('trip.html')
-
 @app.route('/search')
 def search():
     return render_template('search.html')
@@ -226,6 +206,14 @@ def Monsoon():
 @app.route('/Winter')
 def Winter():
     return render_template('Winter.html')
+
+@app.route('/spring')
+def spring():
+    return render_template('spring.html')
+
+@app.route('/autumn')
+def autumn():
+    return render_template('autumn.html')
 
 # ---------------- CITY EXPERIENCES ----------------
 @app.route("/cityexp")

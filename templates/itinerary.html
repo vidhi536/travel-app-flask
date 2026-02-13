@@ -1,51 +1,44 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Your Travel Itinerary</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      padding: 20px;
-    }
-    .place {
-      border: 1px solid #ddd;
-      padding: 15px;
-      margin-bottom: 10px;
-      border-radius: 6px;
-    }
-    h2 {
-      color: #2c3e50;
-    }
-  </style>
+<title>Itinerary</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+body{font-family:Inter;padding:16px;background:#f6f7f9;}
+.card{
+  background:#fff;
+  padding:16px;
+  border-radius:16px;
+  margin-bottom:16px;
+}
+h3{margin-top:0;color:#ff5a5f;}
+</style>
 </head>
+
 <body>
 
-<h1>🗺️ Your Planned Itinerary</h1>
+<h2>Your Travel Itinerary</h2>
 
-<div id="itinerary"></div>
+<div id="itineraries"></div>
 
 <script>
-  const itineraryDiv = document.getElementById("itinerary");
-  const places = JSON.parse(localStorage.getItem("itineraryPlaces"));
+const places = JSON.parse(localStorage.getItem("places")) || [];
 
-  if (!places || places.length === 0) {
-    itineraryDiv.innerHTML = "<p>No places found.</p>";
-  } else {
-    places.forEach((place, index) => {
-      const name = place.properties.name || "Tourist Place";
-      const kind = place.properties.kinds
-        ? place.properties.kinds.replaceAll(",", ", ")
-        : "Sightseeing";
+function generate(days){
+  const perDay = Math.ceil(places.length / days);
+  let html = "";
 
-      itineraryDiv.innerHTML += `
-        <div class="place">
-          <h2>Stop ${index + 1}: ${name}</h2>
-          <p><b>Activity:</b> ${kind}</p>
-          <p><b>Suggested Time:</b> ${index + 1 === 1 ? "Morning" : index + 1 <= 3 ? "Late Morning" : "Afternoon"}</p>
-        </div>
-      `;
-    });
+  for(let i=0;i<days;i++){
+    html += `<div class="card"><h3>Day ${i+1}</h3><ul>`;
+    places.slice(i*perDay,(i+1)*perDay)
+      .forEach(p=> html += `<li>${p.name}</li>`);
+    html += "</ul></div>";
   }
+  return html;
+}
+
+document.getElementById("itineraries").innerHTML =
+  generate(1) + generate(2) + generate(3);
 </script>
 
 </body>
