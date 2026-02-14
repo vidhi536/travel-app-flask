@@ -102,7 +102,7 @@ function initMap() {
     directionsService = new google.maps.DirectionsService();
     directionsRenderer = new google.maps.DirectionsRenderer({
         map: map,
-        suppressMarkers: true, // IMPORTANT: we will add custom markers
+        suppressMarkers: true,
         polylineOptions: {
             strokeColor: "#4f46e5",
             strokeWeight: 6,
@@ -122,7 +122,7 @@ function initMap() {
 
             map.setCenter(userLocation);
 
-            // USER MARKER
+            // 🔵 User marker
             new google.maps.Marker({
                 position: userLocation,
                 map: map,
@@ -141,101 +141,91 @@ function initMap() {
     }
 }
 
+
 // Convert Destination Name to Coordinates
-function findDestinationAndRoute(startLoc, destName) {
+function findDestinationAndRoute(originLocation, destination) {
 
     const geocoder = new google.maps.Geocoder();
 
-    geocoder.geocode({ address: destName }, (results, status) => {
+    geocoder.geocode({ address: destination }, function(results, status) {
 
         if (status === "OK") {
 
-            const destLocation = results[0].geometry.location;
+            const destinationLocation = results[0].geometry.location;
 
-            // DESTINATION MARKER
+            // 🔴 Destination marker
             new google.maps.Marker({
-                position: destLocation,
                 map: map,
+                position: destinationLocation,
                 title: "Destination",
                 icon: "http://maps.google.com/mapfiles/ms/icons/red-dot.png"
             });
 
-            findNearbyAttractions(startLoc, destLocation);
+            map.setCenter(destinationLocation);
+
+            findNearbyAttractions(destinationLocation);
+            calculateRoute(originLocation, destinationLocation);
 
         } else {
-            alert("Destination not found.");
+            console.error("Geocode failed:", status);
         }
     });
 }
 
-// Find Tourist Attractions Near Destination
-function findNearbyAttractions(startLoc, destLocation) {
+
+// 🟢 Find Tourist Attractions Near Destination
+function findNearbyAttractions(location) {
 
     const request = {
-        location: destLocation,
+        location: location,
         radius: 5000,
-        type: ['tourist_attraction']
+        type: "tourist_attraction"
     };
 
-    placesService.nearbySearch(request, (results, status) => {
+    placesService.nearbySearch(request, function(results, status) {
 
-        let waypoints = [];
+        if (status === google.maps.places.PlacesServiceStatus.OK) {
 
-        if (status === google.maps.places.PlacesServiceStatus.OK && results.length > 0) {
-
-            // Sort by rating (highest first)
             results.sort((a, b) => (b.rating || 0) - (a.rating || 0));
 
-            const topPlaces = results.slice(0, 3);
+            const topPlaces = results.slice(0, 10);
 
-            topPlaces.forEach((place) => {
-
-                waypoints.push({
-                    location: place.geometry.location,
-                    stopover: true
-                });
-
+            topPlaces.forEach(place => {
                 new google.maps.Marker({
-                    position: place.geometry.location,
                     map: map,
-                    title: place.name,
+                    position: place.geometry.location,
+                    title: place.name + " ⭐ " + (place.rating || "N/A"),
                     icon: "http://maps.google.com/mapfiles/ms/icons/green-dot.png"
                 });
             });
 
-            document.getElementById("status-text").innerText =
-                `Route via ${topPlaces.length} famous spots`;
+        } else {
+            console.error("Nearby search failed:", status);
         }
-
-        calculateRoute(startLoc, destLocation, waypoints);
     });
 }
 
-// Draw Route
-function calculateRoute(start, end, waypoints) {
+
+// 🟣 Draw Route
+function calculateRoute(start, end) {
 
     const request = {
         origin: start,
         destination: end,
-        waypoints: waypoints,
-        optimizeWaypoints: true,
         travelMode: google.maps.TravelMode.DRIVING
     };
 
     directionsService.route(request, function(result, status) {
 
-        if (status === "OK") {
-
+        if (status === google.maps.DirectionsStatus.OK) {
             directionsRenderer.setDirections(result);
-
+            document.getElementById("status-text").innerText =
+                "Route Ready ✔";
         } else {
-
-            console.error("Directions failed with status:", status);
-            alert("Directions failed: " + status);
+            console.error("Directions failed:", status);
         }
     });
 }
-
 
 
 function handleLocationError(browserHasGeolocation) {
@@ -244,6 +234,7 @@ function handleLocationError(browserHasGeolocation) {
         "Browser doesn't support geolocation.");
 }
 </script>
+
 
 
     <script async defer

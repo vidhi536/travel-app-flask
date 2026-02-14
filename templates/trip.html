@@ -219,65 +219,73 @@
     </div>
 
     <script>
-        // Mobile Menu Toggle
-        const btn = document.getElementById('mobile-menu-btn');
-        const menu = document.getElementById('mobile-menu');
+    // Mobile Menu Toggle
+    const btn = document.getElementById('mobile-menu-btn');
+    const menu = document.getElementById('mobile-menu');
 
-        btn.addEventListener('click', () => {
-            menu.classList.toggle('hidden');
-        });
+    btn.addEventListener('click', () => {
+        menu.classList.toggle('hidden');
+    });
 
-        // Geolocation & Trip Logic
-        let currentLat, currentLng;
+    // Geolocation
+    let currentLat, currentLng;
 
-        function getLocation() {
-            if (navigator.geolocation) {
-                const btn = document.querySelector('button[onclick="getLocation()"]');
-                const originalText = btn.innerHTML;
-                btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Locating...';
-                
-                navigator.geolocation.getCurrentPosition(
-                    (pos) => {
-                        currentLat = pos.coords.latitude;
-                        currentLng = pos.coords.longitude;
-                        document.getElementById('current-loc-display').innerText = "Detected (Lat: " + currentLat.toFixed(2) + ")";
-                        document.getElementById('current-loc-display').classList.add('text-green-600');
-                        btn.innerHTML = '<i class="fa-solid fa-check"></i> Location Found';
-                    },
-                    (error) => {
-                        alert("Location access denied or unavailable.");
-                        btn.innerHTML = originalText;
-                    }
-                );
-            } else {
-                alert("Geolocation is not supported by this browser.");
-            }
+    function getLocation() {
+        if (navigator.geolocation) {
+
+            const btn = document.querySelector('button[onclick="getLocation()"]');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Locating...';
+
+            navigator.geolocation.getCurrentPosition(
+                (pos) => {
+                    currentLat = pos.coords.latitude;
+                    currentLng = pos.coords.longitude;
+
+                    document.getElementById('current-loc-display').innerText =
+                        "Detected (Lat: " + currentLat.toFixed(2) + ")";
+                    document.getElementById('current-loc-display').classList.add('text-green-600');
+
+                    btn.innerHTML = '<i class="fa-solid fa-check"></i> Location Found';
+                },
+                () => {
+                    alert("Location access denied or unavailable.");
+                    btn.innerHTML = originalText;
+                }
+            );
+        } else {
+            alert("Geolocation is not supported by this browser.");
         }
+    }
 
-        function goToMap() {
-            const dest = document.getElementById("destination").value;
-            
-            // Simple validation visualization
-            if(!dest) {
-                const inputContainer = document.getElementById("destination").parentElement;
-                inputContainer.classList.add('ring-2', 'ring-red-500', 'bg-red-50');
-                setTimeout(() => {
-                    inputContainer.classList.remove('ring-2', 'ring-red-500', 'bg-red-50');
-                }, 2000);
-                return;
-            }
 
-            // Update UI purely for demo purposes before redirect
-            document.getElementById('sumTo').innerText = dest;
-            document.getElementById('sumDistance').innerText = "Calc...";
-            document.getElementById('sumTime').innerText = "Calc...";
+    // 🚀 Redirect to Map WITH destination parameter
+    function goToMap() {
 
-            // Actual Redirect Logic
-            // Note: If you have Python/Flask backend, ensure routes match
+        const dest = document.getElementById("destination").value.trim();
+
+        if (!dest) {
+            const inputContainer = document.getElementById("destination").parentElement;
+            inputContainer.classList.add('ring-2', 'ring-red-500', 'bg-red-50');
+
             setTimeout(() => {
-               window.location.href = "/map"; 
-            }, 500);
+                inputContainer.classList.remove('ring-2', 'ring-red-500', 'bg-red-50');
+            }, 2000);
+            return;
         }
-    </script>
+
+        document.getElementById('sumTo').innerText = dest;
+        document.getElementById('sumDistance').innerText = "Calculating...";
+        document.getElementById('sumTime').innerText = "Calculating...";
+
+        // ✅ IMPORTANT: Pass destination in URL
+        const encodedDestination = encodeURIComponent(dest);
+
+        setTimeout(() => {
+            window.location.href = `/map?destination=${encodedDestination}`;
+        }, 500);
+    }
+</script>
+
 </body>
 </html>
