@@ -215,42 +215,9 @@ def spring():
 def autumn():
     return render_template('autumn.html')
 
-# ---------------- CITY EXPERIENCES ----------------
-@app.route("/cityexp")
-def city_experiences():
-    return render_template("cityexp.html")
-
-# ---------------- Historical ----------------
-@app.route("/historical")
-def historical_places():
-    return render_template("historical.html")
-
-# ---------------- Historical ----------------
-@app.route("/spiritual_places")
-def spiritual_places():
-    return render_template("spiritual_places.html")
-
-# ---------------- Parks ----------------
-@app.route("/parks_gardens")
-def parks_gardens():
-    return render_template("parks_gardens.html")
-
-# ---------------- Museums ----------------
-@app.route("/museums")
-def museums():
-    return render_template("museums.html")
-
-# ---------------- shopping ----------------
-@app.route("/shopping")
-def shopping():
-    return render_template("shopping.html")
-
-# ---------------- Food ----------------
-@app.route("/food")
-def food():
-    return render_template("food.html")
-
-
+@app.route('/explore_')
+def explore_():
+    return render_template('explore_.html')
 # ---------------- RUN ----------------
 if __name__ == '__main__':
     app.run(host="0.0.0.0", port=5000, debug=True)

@@ -285,6 +285,14 @@
             window.location.href = `/map?destination=${encodedDestination}`;
         }, 500);
     }
+    // Auto-fill destination if passed in URL
+    const params = new URLSearchParams(window.location.search);
+    const destinationFromCard = params.get("destination");
+
+    if (destinationFromCard) {
+        document.getElementById("destination").value = destinationFromCard;
+    }
+
 </script>
 
 </body>
