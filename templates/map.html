@@ -1,245 +1,139 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PlanNGo – Route Planner</title>
-    
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-    <style>
-        body { font-family: 'Poppins', sans-serif; margin: 0; padding: 0; }
-        #map { height: 100vh; width: 100%; }
-        
-        /* Floating Info Card */
-        .info-card {
-            position: absolute;
-            top: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            padding: 15px 25px;
-            border-radius: 50px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-            z-index: 10;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            width: 90%;
-            max-width: 500px;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        /* Bottom Action Bar */
-        .action-bar {
-            position: absolute;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 10;
-            display: flex;
-            gap: 15px;
-        }
+<title>PlanNGo – Map</title>
 
-        .btn-primary {
-            background: linear-gradient(135deg, #4f46e5, #7c3aed);
-            color: white;
-            padding: 12px 30px;
-            border-radius: 50px;
-            font-weight: 600;
-            border: none;
-            cursor: pointer;
-            box-shadow: 0 5px 20px rgba(79, 70, 229, 0.4);
-            transition: transform 0.2s;
-        }
+<script src="https://cdn.tailwindcss.com"></script>
 
-        .btn-primary:hover { transform: translateY(-2px); }
-    </style>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+
+body{
+margin:0;
+font-family:'Poppins',sans-serif;
+}
+
+#map{
+height:100vh;
+width:100%;
+}
+
+</style>
+
 </head>
 
 <body>
 
-    <div class="info-card">
-        <div class="w-10 h-10 bg-indigo-100 rounded-full flex items-center justify-center text-indigo-600">
-            <i class="fa-solid fa-route"></i>
-        </div>
-        <div>
-            <h3 class="font-bold text-slate-800 text-sm m-0">Optimized Route</h3>
-            <p id="status-text" class="text-xs text-slate-500 m-0">Locating you...</p>
-        </div>
-    </div>
+<div id="map"></div>
 
-    <div id="map"></div>
+<script>
 
-    <div class="action-bar">
-        <button class="btn-primary" onclick="window.location.href='/trip'">
-            <i class="fa-solid fa-list-check mr-2"></i> View Full Itinerary
-        </button>
-    </div>
-
-    <script>
 let map;
 let directionsService;
 let directionsRenderer;
-let placesService;
 
 const params = new URLSearchParams(window.location.search);
-const destinationQuery = params.get("destination") || "Gateway of India, Mumbai";
+const destination = params.get("destination") || "Mumbai";
 
-function initMap() {
+const savedPlaces = JSON.parse(localStorage.getItem("tripPlaces")) || [];
 
-    map = new google.maps.Map(document.getElementById("map"), {
-        zoom: 13,
-        center: { lat: 18.5204, lng: 73.8567 },
-        mapTypeControl: false,
-        fullscreenControl: false
-    });
+function initMap(){
 
-    directionsService = new google.maps.DirectionsService();
-    directionsRenderer = new google.maps.DirectionsRenderer({
-        map: map,
-        suppressMarkers: true,
-        polylineOptions: {
-            strokeColor: "#4f46e5",
-            strokeWeight: 6,
-            strokeOpacity: 0.8
-        }
-    });
+map = new google.maps.Map(document.getElementById("map"),{
+zoom:12,
+center:{lat:18.5204,lng:73.8567}
+});
 
-    placesService = new google.maps.places.PlacesService(map);
+directionsService = new google.maps.DirectionsService();
 
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition((position) => {
+directionsRenderer = new google.maps.DirectionsRenderer({
+map:map
+});
 
-            const userLocation = {
-                lat: position.coords.latitude,
-                lng: position.coords.longitude
-            };
+if(navigator.geolocation){
 
-            map.setCenter(userLocation);
+navigator.geolocation.getCurrentPosition(position=>{
 
-            // 🔵 User marker
-            new google.maps.Marker({
-                position: userLocation,
-                map: map,
-                title: "You are here",
-                icon: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png"
-            });
+const start={
+lat:position.coords.latitude,
+lng:position.coords.longitude
+};
 
-            document.getElementById("status-text").innerText =
-                "Found you! Calculating route...";
+new google.maps.Marker({
+position:start,
+map:map,
+title:"Start",
+icon:"http://maps.google.com/mapfiles/ms/icons/blue-dot.png"
+});
 
-            findDestinationAndRoute(userLocation, destinationQuery);
+showPlaces();
 
-        }, () => handleLocationError(true));
-    } else {
-        handleLocationError(false);
-    }
+drawRoute(start);
+
+});
+
 }
 
-
-// Convert Destination Name to Coordinates
-function findDestinationAndRoute(originLocation, destination) {
-
-    const geocoder = new google.maps.Geocoder();
-
-    geocoder.geocode({ address: destination }, function(results, status) {
-
-        if (status === "OK") {
-
-            const destinationLocation = results[0].geometry.location;
-
-            // 🔴 Destination marker
-            new google.maps.Marker({
-                map: map,
-                position: destinationLocation,
-                title: "Destination",
-                icon: "http://maps.google.com/mapfiles/ms/icons/red-dot.png"
-            });
-
-            map.setCenter(destinationLocation);
-
-            findNearbyAttractions(destinationLocation);
-            calculateRoute(originLocation, destinationLocation);
-
-        } else {
-            console.error("Geocode failed:", status);
-        }
-    });
 }
 
+function showPlaces(){
 
-// 🟢 Find Tourist Attractions Near Destination
-function findNearbyAttractions(location) {
+savedPlaces.forEach(place=>{
 
-    const request = {
-        location: location,
-        radius: 5000,
-        type: "tourist_attraction"
-    };
+new google.maps.Marker({
+map:map,
+position:{lat:place.lat,lng:place.lng},
+title:place.name
+});
 
-    placesService.nearbySearch(request, function(results, status) {
+});
 
-        if (status === google.maps.places.PlacesServiceStatus.OK) {
-
-            results.sort((a, b) => (b.rating || 0) - (a.rating || 0));
-
-            const topPlaces = results.slice(0, 10);
-
-            topPlaces.forEach(place => {
-                new google.maps.Marker({
-                    map: map,
-                    position: place.geometry.location,
-                    title: place.name + " ⭐ " + (place.rating || "N/A"),
-                    icon: "http://maps.google.com/mapfiles/ms/icons/green-dot.png"
-                });
-            });
-
-        } else {
-            console.error("Nearby search failed:", status);
-        }
-    });
 }
 
+function drawRoute(start){
 
-// 🟣 Draw Route
-function calculateRoute(start, end) {
+if(savedPlaces.length === 0) return;
 
-    const request = {
-        origin: start,
-        destination: end,
-        travelMode: google.maps.TravelMode.DRIVING
-    };
+const waypoints = savedPlaces.slice(0,-1).map(place=>({
+location:{lat:place.lat,lng:place.lng},
+stopover:true
+}));
 
-    directionsService.route(request, function(result, status) {
+const end = {
+lat: savedPlaces[savedPlaces.length-1].lat,
+lng: savedPlaces[savedPlaces.length-1].lng
+};
 
-        if (status === google.maps.DirectionsStatus.OK) {
-            directionsRenderer.setDirections(result);
-            document.getElementById("status-text").innerText =
-                "Route Ready ✔";
-        } else {
-            console.error("Directions failed:", status);
-        }
-    });
+directionsService.route({
+
+origin:start,
+destination:end,
+waypoints:waypoints,
+travelMode:google.maps.TravelMode.DRIVING
+
+},(result,status)=>{
+
+if(status==="OK"){
+
+directionsRenderer.setDirections(result);
+
 }
 
+});
 
-function handleLocationError(browserHasGeolocation) {
-    alert(browserHasGeolocation ?
-        "Geolocation failed." :
-        "Browser doesn't support geolocation.");
 }
+
 </script>
 
-
-
-    <script async defer
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCkIPEHU60BvEC3d598gpel5L9wT0lfai0&libraries=places&callback=initMap">
-    </script>
+<script async defer
+src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCkIPEHU60BvEC3d598gpel5L9wT0lfai0&callback=initMap">
+</script>
 
 </body>
 </html>

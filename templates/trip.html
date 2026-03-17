@@ -138,7 +138,7 @@
                                 <i class="fa-solid fa-location-crosshairs"></i> Use My Current Location
                             </button>
 
-                            <button onclick="goToMap()" class="w-full bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-bold py-4 rounded-2xl shadow-lg shadow-indigo-200 transition-all transform hover:-translate-y-1 flex items-center justify-center gap-2">
+                            <button onclick="goToItinerary()" class="w-full bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-bold py-4 rounded-2xl shadow-lg shadow-indigo-200 transition-all transform hover:-translate-y-1 flex items-center justify-center gap-2">
                                 <span>Generate Itinerary</span>
                                 <i class="fa-solid fa-arrow-right"></i>
                             </button>
@@ -260,38 +260,32 @@
 
 
     // 🚀 Redirect to Map WITH destination parameter
-    function goToMap() {
+function goToItinerary() {
 
-        const dest = document.getElementById("destination").value.trim();
+    const destination = document.getElementById("destination").value;
 
-        if (!dest) {
-            const inputContainer = document.getElementById("destination").parentElement;
-            inputContainer.classList.add('ring-2', 'ring-red-500', 'bg-red-50');
-
-            setTimeout(() => {
-                inputContainer.classList.remove('ring-2', 'ring-red-500', 'bg-red-50');
-            }, 2000);
-            return;
-        }
-
-        document.getElementById('sumTo').innerText = dest;
-        document.getElementById('sumDistance').innerText = "Calculating...";
-        document.getElementById('sumTime').innerText = "Calculating...";
-
-        // ✅ IMPORTANT: Pass destination in URL
-        const encodedDestination = encodeURIComponent(dest);
-
-        setTimeout(() => {
-            window.location.href = `/map?destination=${encodedDestination}`;
-        }, 500);
+    if (!destination) {
+        alert("Please enter a destination");
+        return;
     }
-    // Auto-fill destination if passed in URL
-    const params = new URLSearchParams(window.location.search);
-    const destinationFromCard = params.get("destination");
 
-    if (destinationFromCard) {
-        document.getElementById("destination").value = destinationFromCard;
-    }
+    // Generate a unique trip id
+    const tripId = crypto.randomUUID();
+
+    const encodedDestination = encodeURIComponent(destination);
+
+    // Redirect with trip_id + destination
+    window.location.href = `/itinerary?trip_id=${tripId}&destination=${encodedDestination}`;
+}
+
+
+// Auto-fill destination if passed in URL
+const params = new URLSearchParams(window.location.search);
+const destinationFromCard = params.get("destination");
+
+if (destinationFromCard) {
+    document.getElementById("destination").value = destinationFromCard;
+}
 
 </script>
 

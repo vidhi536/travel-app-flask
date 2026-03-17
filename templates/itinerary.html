@@ -1,44 +1,160 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Itinerary</title>
+
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>PlanNGo – Itinerary</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+
 <style>
-body{font-family:Inter;padding:16px;background:#f6f7f9;}
-.card{
-  background:#fff;
-  padding:16px;
-  border-radius:16px;
-  margin-bottom:16px;
+
+body{
+font-family:'Poppins',sans-serif;
+background:#f4f6fb;
 }
-h3{margin-top:0;color:#ff5a5f;}
+
+.day-card{
+background:white;
+border-radius:14px;
+padding:18px;
+margin-bottom:20px;
+box-shadow:0 8px 20px rgba(0,0,0,0.08);
+}
+
+.place{
+padding:8px 0;
+border-bottom:1px solid #eee;
+}
+
 </style>
+
 </head>
 
-<body>
+<body class="p-8">
 
-<h2>Your Travel Itinerary</h2>
+<h1 class="text-3xl font-bold text-center mb-8">
+Your Travel Itinerary
+</h1>
 
-<div id="itineraries"></div>
+<div id="itinerary" class="max-w-2xl mx-auto"></div>
+
+<div class="text-center mt-8">
+
+<button onclick="openMap()"
+class="bg-indigo-600 text-white px-6 py-3 rounded-full">
+
+View Route on Map
+
+</button>
+
+</div>
 
 <script>
-const places = JSON.parse(localStorage.getItem("places")) || [];
 
-function generate(days){
-  const perDay = Math.ceil(places.length / days);
-  let html = "";
+const params = new URLSearchParams(window.location.search);
+const destination = params.get("destination") || "Mumbai";
 
-  for(let i=0;i<days;i++){
-    html += `<div class="card"><h3>Day ${i+1}</h3><ul>`;
-    places.slice(i*perDay,(i+1)*perDay)
-      .forEach(p=> html += `<li>${p.name}</li>`);
-    html += "</ul></div>";
-  }
-  return html;
+let map;
+let placesService;
+
+let itineraryPlaces = [];
+
+function initMap(){
+
+map = new google.maps.Map(document.createElement("div"));
+
+placesService = new google.maps.places.PlacesService(map);
+
+searchPlaces();
+
 }
 
-document.getElementById("itineraries").innerHTML =
-  generate(1) + generate(2) + generate(3);
+function searchPlaces(){
+
+const request = {
+query: "tourist attractions in " + destination
+};
+
+placesService.textSearch(request,(results,status)=>{
+
+if(status === google.maps.places.PlacesServiceStatus.OK){
+
+const topPlaces = results.slice(0,9);
+
+topPlaces.forEach(place=>{
+
+itineraryPlaces.push({
+name: place.name,
+lat: place.geometry.location.lat(),
+lng: place.geometry.location.lng(),
+rating: place.rating || "N/A"
+});
+
+});
+
+generateItinerary();
+
+}
+
+});
+
+}
+
+function generateItinerary(){
+
+let html="";
+
+for(let i=0;i<itineraryPlaces.length;i++){
+
+if(i%3===0){
+
+html+=`
+<div class="day-card">
+<h2 class="text-xl font-semibold mb-2">
+Day ${Math.floor(i/3)+1}
+</h2>
+`;
+
+}
+
+html+=`
+<div class="place">
+<div class="font-medium">${itineraryPlaces[i].name}</div>
+<div class="text-sm text-gray-500">
+⭐ ${itineraryPlaces[i].rating}
+</div>
+</div>
+`;
+
+if(i%3===2 || i===itineraryPlaces.length-1){
+
+html+=`</div>`;
+
+}
+
+}
+
+document.getElementById("itinerary").innerHTML = html;
+
+}
+
+function openMap(){
+
+localStorage.setItem("tripPlaces", JSON.stringify(itineraryPlaces));
+
+window.location.href = `/map?destination=${destination}`;
+
+}
+
+</script>
+
+<script async defer
+src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCkIPEHU60BvEC3d598gpel5L9wT0lfai0&libraries=places&callback=initMap">
 </script>
 
 </body>
